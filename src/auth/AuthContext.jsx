@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
     session,
     user: session?.user || null,
     signOut: () => supabase.auth.signOut(),
+    loading,
   };
 
   // Não renderiza o app até que a sessão inicial seja carregada
