@@ -9,6 +9,7 @@ import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import LeaveReviewPage from './pages/LeaveReviewPage';
 import LoginPage from './pages/LoginPage';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Importações da Dashboard (com caminho corrigido para DashboardLayout)
 import DashboardLayout from './dashboard/data/DashboardLayout'; // <-- CAMINHO CORRIGIDO
@@ -25,6 +26,7 @@ import { AuthProvider } from './auth/AuthContext';
 function App() {
   return (
     // O AuthProvider deve envolver todas as rotas para que a autenticação funcione
+    <ThemeProvider>
     <AuthProvider>
       <Toaster
         position="top-right"
@@ -62,6 +64,7 @@ function App() {
 
       </Routes>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 

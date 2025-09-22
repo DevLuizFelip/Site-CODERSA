@@ -1,25 +1,39 @@
 /* === RESET BÁSICO E VARIÁVEIS GLOBAIS === */
 :root {
   --primary-color: #138aec;
-  --background-light: #f6f7f8;
-  --background-dark: #101a22; /* Para o modo escuro futuro */
-  --text-light: #182733;
-  --text-muted: #475f70;
-  --white: #ffffff;
+  --background-color: #f6f7f8;
+  --surface-color: #ffffff;
+  --text-color: #182733;
+  --text-muted-color: #475f70;
   --border-color: #e5e7eb;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body.dark {
+  --primary-color: #138aec;
+  --background-color: #101a22;
+  --surface-color: #1f2937; /* Um cinza um pouco mais claro para cards */
+  --text-color: #f9fafb;
+  --text-muted-color: #9ca3af;
+  --border-color: #374151;
 }
 
+/* Garante uma transição suave entre os temas */
+body, .header, .site-footer, .service-card, .portfolio-card, .testimonial-card {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Atualize algumas regras existentes para usar as novas variáveis */
 body {
   font-family: 'Manrope', sans-serif;
-  background-color: var(--background-light);
-  color: var(--text-light);
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.6;
+}
+
+.service-card, .portfolio-card, .testimonial-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  /* ... resto dos estilos ... */
 }
 
 a {
@@ -470,7 +484,7 @@ section {
 /* Adicione este código ao seu src/index.css */
 
 .site-logo {
-  height: 40px; /* Você pode ajustar a altura conforme necessário */
+  height: 45px; /* Você pode ajustar a altura conforme necessário */
   width: auto;  /* Mantém a proporção da imagem */
 }
 
@@ -496,4 +510,55 @@ section {
 .maintenance-content p {
   font-size: 1.125rem;
   color: var(--text-muted);
+}
+/* Estilo para o botão de troca de tema */
+.theme-toggle-button {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.theme-toggle-button:hover {
+    background-color: var(--background-color);
+}
+/* === MELHORIAS NO HEADER PARA DARK MODE === */
+
+/* Quando o body tiver a classe .dark... */
+body.dark .header {
+  /* Usamos a variável de cor de superfície do tema escuro */
+  background-color: var(--surface-color); 
+  /* Usamos a variável de cor de borda do tema escuro */
+  border-bottom: 1px solid var(--border-color); 
+}
+
+/* ...a cor dos links da navegação deve ser a cor de texto suave do tema escuro. */
+body.dark .header-nav a {
+  color: var(--text-muted-color);
+}
+
+/* ...e ao passar o mouse ou quando o link estiver ativo, ele fica branco. */
+body.dark .header-nav a:hover,
+body.dark .header-nav .active { /* .active é a classe que o NavLink usa */
+  color: var(--text-color);
+}
+
+/* Ajusta também o botão de tema para o modo escuro */
+body.dark .theme-toggle-button {
+    background-color: var(--surface-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+.header-logo span {
+  /* ATUALIZADO: Trocamos 'Poppins' por 'MuseoModerno' */
+  font-family: 'MuseoModerno', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
