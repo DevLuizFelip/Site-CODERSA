@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 
+
 // Componente do Logo (pode ser um SVG ou img)
 const Logo = () => ( 
     <svg height="32" width="32" viewBox="0 0 48 48">
@@ -32,6 +33,7 @@ const Sidebar = () => {
         {/* <NavLink to="/admin/leads">Pedidos</NavLink> */}
         <NavLink to="/admin/projetos">Projetos</NavLink>
         <NavLink to="/admin/avaliacoes">Avaliações</NavLink>
+        <NavLink to="/admin/seguranca">Segurança</NavLink>
       </nav>
       
       {/* O botão de logout fica no final */}

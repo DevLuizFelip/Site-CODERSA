@@ -16,6 +16,7 @@ import LeadsPage from './dashboard/pages/LeadsPage';
 import ProjectsPage from './dashboard/pages/ProjectsPage';
 import ProtectedRoute from './auth/ProtectedRoute';
 import TestimonialsPage from './dashboard/pages/TestimonialsPage';
+import SecurityPage from './dashboard/pages/SecurityPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           {/* <Route path="leads" element={<LeadsPage />} /> */}
           <Route path="projetos" element={<ProjectsPage />} />
           <Route path="avaliacoes" element={<TestimonialsPage />} /> 
+          <Route path="seguranca" element={<SecurityPage />} />
         </Route>
       </Routes></>
   );

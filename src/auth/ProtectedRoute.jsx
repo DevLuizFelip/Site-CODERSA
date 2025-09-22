@@ -1,24 +1,22 @@
-// src/auth/ProtectedRoute.jsx
-
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const ProtectedRoute = () => {
-  // Agora também pegamos o estado de 'loading'
   const { session, loading } = useAuth();
 
-  // 1. Se ainda estivermos verificando a sessão, não mostre nada (ou um spinner)
   if (loading) {
-    return <div>Carregando...</div>; // Ou null, ou um componente de Spinner
+    // Enquanto a sessão está sendo verificada, mostramos uma tela de carregamento
+    // para evitar o "flash" da página de login.
+    return <div>Verificando autenticação...</div>;
   }
 
-  // 2. Se a verificação terminou E não há sessão, redireciona para o login
   if (!session) {
+    // Se a verificação terminou e não há sessão, redireciona para o login
     return <Navigate to="/login" replace />;
   }
 
-  // 3. Se a verificação terminou E HÁ uma sessão, permite o acesso
+  // Se a verificação terminou e há uma sessão, permite o acesso
   return <Outlet />;
 };
 

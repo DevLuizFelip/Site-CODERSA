@@ -1,40 +1,35 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { supabase } from '../supabaseClient';
 
-// Cria o contexto
 const AuthContext = createContext();
 
-// Componente Provedor
 export const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Busca a sessão ativa quando o app carrega
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    // Busca a sessão inicial uma vez
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setLoading(false);
-    };
-    getSession();
+    });
 
-    // Ouve mudanças no estado de autenticação (login, logout)
+    // Ouve por mudanças de login/logout
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
-    // Limpa a inscrição quando o componente desmontar
     return () => subscription.unsubscribe();
   }, []);
 
   const value = {
     session,
-    user: session?.user || null,
+    user: session?.user ?? null,
     signOut: () => supabase.auth.signOut(),
     loading,
   };
 
-  // Não renderiza o app até que a sessão inicial seja carregada
+  // Renderiza os filhos apenas quando o carregamento inicial da sessão terminar
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
@@ -42,7 +37,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Hook customizado para usar o contexto facilmente
 export const useAuth = () => {
   return useContext(AuthContext);
 };
