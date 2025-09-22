@@ -122,14 +122,16 @@ section {
 }
 
 .hero-boxed {
-  position: relative; /* Necessário para a sobreposição escura */
-  border-radius: 1rem; /* Bordas arredondadas */
-  overflow: hidden; /* Garante que a imagem não vaze das bordas arredondadas */
-  padding: 6rem 3rem; /* Espaçamento interno para o texto */
+  position: relative; 
+  border-radius: 1rem; 
+  overflow: hidden; 
+  padding: 6rem 3rem; 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 500px;
+  min-height: 600px;
+  
+  /* Propriedades importantes para a imagem de fundo */
   background-size: cover;
   background-position: center;
 }
