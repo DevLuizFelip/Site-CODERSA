@@ -25,13 +25,16 @@ export const AuthProvider = ({ children }) => {
   const value = {
     session,
     user: session?.user ?? null,
-    signOut: () => supabase.auth.signOut(),
     loading,
+    signOut: async () => {
+      await supabase.auth.signOut();
+      setSession(null); // Garante que o estado local do React seja nulo
+    },
   };
 
-  // Renderiza os filhos apenas quando o carregamento inicial da sessão terminar
   return (
     <AuthContext.Provider value={value}>
+      {/* Aqui é importante que os filhos só sejam renderizados APÓS o carregamento inicial */}
       {!loading && children}
     </AuthContext.Provider>
   );
