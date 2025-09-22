@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const Logo = () => ( <svg height="32" width="32" viewBox="0 0 48 48"><path fillRule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="var(--primary-color)" clipRule="evenodd"></path></svg> );
+import logoDaEmpresa from '../assets/CodersaLogo8.png';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="container header-content">
         <Link to="/" className="header-logo">
-          <Logo />
+          <img src={logoDaEmpresa} alt="Logo da CODERSA" className="site-logo" />
           <span>CODERSA</span>
         </Link>
         <nav className="header-nav">

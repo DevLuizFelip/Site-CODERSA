@@ -413,3 +413,91 @@
 .action-button--delete {
   background-color: #ef4444; /* red-500 */
 }
+/* === ESTILOS PARA O MODO DE MANUTENÇÃO === */
+.maintenance-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+.maintenance-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.maintenance-section p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.toggle-switch span {
+  font-weight: 500;
+}
+/* === ESTILOS PARA O SELETOR TOGGLE SWITCH === */
+
+/* O container do seletor */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Esconde o checkbox padrão do HTML, pois vamos criar nosso próprio visual */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* O fundo do seletor (a "pista" onde o círculo desliza) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Cor quando está desligado */
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/* O círculo que desliza (o "botão") */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/* --- LÓGICA DE MUDANÇA DE COR E POSIÇÃO QUANDO ATIVADO --- */
+
+/* Quando o input (escondido) está checado, o slider (que vem depois dele) muda de cor */
+input:checked + .slider {
+  background-color: var(--primary-color); /* Usa a cor azul da sua marca */
+}
+
+/* Quando o input está checado, o :before (círculo) do slider se move para a direita */
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Estilo para bordas arredondadas */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
