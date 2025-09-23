@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// ATUALIZADO: Não precisamos mais do SortableContext, apenas do core do dnd-kit
 import { DndContext, PointerSensor, useSensor, useSensors, useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import toast from 'react-hot-toast';
@@ -10,9 +9,11 @@ import ProjectForm from '../components/ProjectForm';
 
 // Constantes
 const columns = ['Planejamento', 'Em Desenvolvimento', 'Testes', 'Concluído'];
+// Nome do bucket onde as imagens dos projetos são salvas
+const PROJECT_IMAGES_BUCKET = 'project-images';
 
 
-// --- COMPONENTES INTERNOS DO KANBAN (REATORADOS PARA O PADRÃO CORRETO) ---
+// --- COMPONENTES INTERNOS DO KANBAN ---
 
 // KANBAN CARD (Agora usa useDraggable)
 const KanbanCard = ({ project, onClick }) => {
@@ -42,7 +43,7 @@ const KanbanColumn = ({ title, projects, onCardClick }) => {
   });
 
   const columnStyle = {
-    backgroundColor: isOver ? '#e0f2fe' : '#f3f4f6', // Feedback visual ao passar o mouse
+    backgroundColor: isOver ? 'var(--primary-color-light)' : 'var(--background-color)', // Usando variáveis CSS
     transition: 'background-color 0.2s ease',
   };
 
@@ -70,34 +71,52 @@ const ProjectsPage = () => {
   const [isFormModalOpen, setFormModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   
+  // Novos estados para o upload de imagem
+  const [uploading, setUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const sensors = useSensors(useSensor(PointerSensor));
 
-  async function fetchProjects() { /* ... (sem alterações) */ }
-  useEffect(() => { /* ... (sem alterações) */ }, []);
+  // Função para buscar projetos
+  async function fetchProjects() {
+    setLoading(true);
+    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+    
+    if (error) {
+      toast.error('Não foi possível carregar os projetos.');
+      console.error('Erro ao carregar projetos:', error);
+    } else {
+      setProjects(data);
+    }
+    setLoading(false);
+  }
 
-  // LÓGICA DE DRAG AND DROP CORRETA E SIMPLIFICADA
+  // Efeito para buscar projetos na montagem e se inscrever em atualizações em tempo real
+  useEffect(() => {
+    fetchProjects();
+    const channel = supabase.channel('projects-realtime').on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => {
+      fetchProjects(); // Recarrega os projetos quando houver uma mudança
+    }).subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
+  // Lógica de Drag and Drop
   const handleDragEnd = async (event) => {
     const { active, over } = event;
-
-    // Se o card não for solto sobre uma coluna válida, não faz nada
-    if (!over) {
-      return;
-    }
+    if (!over) { return; }
 
     const projectId = active.id;
-    const newStatus = over.id; // O ID da coluna droppable é o novo status
+    const newStatus = over.id;
     const currentProject = projects.find(p => p.id === projectId);
 
-    // Se o status for realmente diferente, atualiza
     if (currentProject && currentProject.status !== newStatus) {
-      // Atualização otimista na tela
       setProjects(prev => prev.map(p => (p.id === projectId ? { ...p, status: newStatus } : p)));
 
-      // Atualização no Supabase
       const { error } = await supabase.from('projects').update({ status: newStatus }).eq('id', projectId);
 
       if (error) {
         toast.error('Falha ao atualizar o status.');
+        console.error('Erro ao atualizar status:', error);
         fetchProjects(); // Reverte a mudança se der erro no DB
       } else {
         toast.success("Status atualizado!");
@@ -105,56 +124,126 @@ const ProjectsPage = () => {
     }
   };
   
-  // Funções de manipulação (sem alterações)
-  // #region Funções Ocultas (sem alteração)
-  async function fetchProjects() { const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false }); if (error) { toast.error('Não foi possível carregar os projetos.'); } else { setProjects(data); } setLoading(false); }
-  useEffect(() => { fetchProjects(); const channel = supabase.channel('projects-realtime').on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => { fetchProjects(); }).subscribe(); return () => { supabase.removeChannel(channel); }; }, []);
-  const openDetailsModal = (project) => { setSelectedProject(project); setDetailsModalOpen(true); };
-  const openFormModal = (project = null) => { setSelectedProject(project); setDetailsModalOpen(false); setFormModalOpen(true); };
-  const closeModal = () => { setDetailsModalOpen(false); setFormModalOpen(false); setSelectedProject(null); };
+  // Funções para Modais
+  const openDetailsModal = (project) => {
+    // Constrói a URL pública da imagem para exibição no modal de detalhes
+    let imageUrl = project.image_url;
+    if (imageUrl) {
+        const { data: { publicUrl } } = supabase.storage
+            .from(PROJECT_IMAGES_BUCKET)
+            .getPublicUrl(imageUrl);
+        imageUrl = publicUrl;
+    }
+    setSelectedProject({ ...project, public_image_url: imageUrl });
+    setDetailsModalOpen(true);
+  };
 
+  const openFormModal = (project = null) => {
+    setSelectedProject(project);
+    setDetailsModalOpen(false); // Fecha o modal de detalhes se estiver aberto
+    setFormModalOpen(true);
+    setSelectedFile(null); // Garante que nenhum arquivo antigo esteja selecionado
+  };
+
+  const closeModal = () => {
+    setDetailsModalOpen(false);
+    setFormModalOpen(false);
+    setSelectedProject(null);
+    setSelectedFile(null); // Limpa o arquivo selecionado ao fechar o modal
+  };
+
+  // Função para lidar com a seleção do arquivo no ProjectForm
+  const handleFileSelected = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    } else {
+      setSelectedFile(null);
+    }
+  };
+
+  // Lógica de Submissão do Formulário (com Upload)
   const handleFormSubmit = async (formData) => {
-    const isEditing = !!formData.id;
-    
+    setUploading(true);
+    let imageUrlForDb = formData.image_url; // Mantém a URL existente se não houver novo upload
+
+    // 1. Se um novo arquivo foi selecionado, faz o upload
+    if (selectedFile) {
+      const fileExtension = selectedFile.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 15)}.${fileExtension}`; // Nome de arquivo único
+      
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from(PROJECT_IMAGES_BUCKET)
+        .upload(fileName, selectedFile, {
+            cacheControl: '3600',
+            upsert: false // Não sobrescrever se já existir
+        });
+
+      if (uploadError) {
+        toast.error(`Falha no upload da imagem: ${uploadError.message}`);
+        console.error('Erro de upload:', uploadError);
+        setUploading(false);
+        return;
+      }
+      imageUrlForDb = uploadData.path; // O caminho (dentro do bucket) para salvar no DB
+    }
+
+    // 2. Prepara os dados para o banco de dados
     const projectData = {
       title: formData.title,
       client: formData.client,
       deadline: formData.deadline,
       description: formData.description,
-      image_url: formData.image_url,
       is_featured: formData.is_featured,
       show_in_portfolio: formData.show_in_portfolio,
       technologies: formData.technologies.split(',').map(tech => tech.trim()),
+      image_url: imageUrlForDb, // Salva o caminho da imagem (novo ou antigo)
     };
 
+    // 3. Insere ou atualiza o registro do projeto
+    const isEditing = !!formData.id;
     const promise = isEditing
       ? supabase.from('projects').update(projectData).eq('id', formData.id)
       : supabase.from('projects').insert([{ ...projectData, status: 'Planejamento' }]);
     
     toast.promise(promise, {
-       loading: isEditing ? 'Salvando...' : 'Criando...',
+       loading: isEditing ? 'Salvando projeto...' : 'Criando projeto...',
        success: `Projeto ${isEditing ? 'atualizado' : 'criado'}!`,
-       error: `Erro ao ${isEditing ? 'atualizar' : 'criar'}.`,
+       error: `Erro ao ${isEditing ? 'atualizar' : 'criar'} projeto.`,
     });
     
-    const { error } = await promise;
+    const { error } = await promise; // Aguarda a conclusão da promessa
 
-    // Se não houve erro, nós apenas fechamos o modal.
-    // **NÃO DEVEMOS TER nenhuma linha como 'setProjects(...)' aqui.**
-    // A atualização em tempo real vai cuidar de recarregar a lista.
     if (!error) {
       closeModal();
     }
+    setUploading(false); // Finaliza o estado de upload
+    setSelectedFile(null); // Limpa o arquivo selecionado
   };
+
+  // Lógica de Deleção de Projeto
   const handleDeleteProject = async (projectId) => {
-    if (window.confirm("Tem certeza?")) {
+    if (window.confirm("Tem certeza que deseja deletar este projeto? Esta ação é irreversível.")) {
+      const projectToDelete = projects.find(p => p.id === projectId);
+      
+      // Tenta deletar a imagem do Storage, se houver
+      if (projectToDelete?.image_url) {
+          const { error: deleteImageError } = await supabase.storage
+              .from(PROJECT_IMAGES_BUCKET)
+              .remove([projectToDelete.image_url]);
+          if (deleteImageError) {
+              console.error("Erro ao deletar imagem do Storage:", deleteImageError);
+              toast.error("Erro ao deletar a imagem do projeto. Tente novamente.");
+              return;
+          }
+      }
+
+      // Deleta o registro do projeto do banco de dados
       const promise = supabase.from('projects').delete().eq('id', projectId);
-      toast.promise(promise, { loading: 'Deletando...', success: 'Deletado!', error: 'Erro ao deletar.' });
-      await promise;
+      toast.promise(promise, { loading: 'Deletando projeto...', success: 'Projeto deletado!', error: 'Erro ao deletar projeto.' });
+      await promise; // Aguarda a conclusão da promessa
       closeModal();
     }
-  }
-  // #endregion
+  };
   
   if (loading) { return <div>Carregando projetos...</div>; }
 
@@ -175,13 +264,21 @@ const ProjectsPage = () => {
         ))}
       </div>
 
-      {/* Modais (sem alterações) */}
+      {/* Modal de Detalhes do Projeto */}
       <Modal isOpen={isDetailsModalOpen} onClose={closeModal}>
         {selectedProject && (
           <div className="modal-details">
             <h2>{selectedProject.title}</h2>
+            {selectedProject.public_image_url && (
+                <img src={selectedProject.public_image_url} alt={`Capa do projeto ${selectedProject.title}`} className="project-detail-image"/>
+            )}
             <div className="detail-item"><strong>Cliente:</strong><p>{selectedProject.client}</p></div>
             <div className="detail-item"><strong>Prazo Final:</strong><p>{selectedProject.deadline}</p></div>
+            <div className="detail-item"><strong>Descrição:</strong><p>{selectedProject.description}</p></div>
+            <div className="detail-item"><strong>Tecnologias:</strong><p>{selectedProject.technologies?.join(', ')}</p></div>
+            <div className="detail-item"><strong>Destaque na Homepage:</strong><p>{selectedProject.is_featured ? 'Sim' : 'Não'}</p></div>
+            <div className="detail-item"><strong>Portfólio Público:</strong><p>{selectedProject.show_in_portfolio ? 'Sim' : 'Não'}</p></div>
+
             <div className="modal-actions">
                 <button onClick={() => openFormModal(selectedProject)} className="add-project-button">Editar Projeto</button>
                 <button onClick={() => handleDeleteProject(selectedProject.id)} className="action-button action-button--delete">Deletar</button>
@@ -189,8 +286,15 @@ const ProjectsPage = () => {
           </div>
         )}
       </Modal>
+
+      {/* Modal do Formulário de Projeto */}
       <Modal isOpen={isFormModalOpen} onClose={closeModal}>
-          <ProjectForm onSubmit={handleFormSubmit} initialData={selectedProject} />
+          <ProjectForm
+            onSubmit={handleFormSubmit}
+            initialData={selectedProject}
+            onFileChange={handleFileSelected} // Passa a função para o ProjectForm
+            isUploading={uploading} // Informa ao ProjectForm o status do upload
+          />
       </Modal>
     </DndContext>
   );

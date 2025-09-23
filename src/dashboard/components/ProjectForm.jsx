@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from 'react';
 
-const ProjectForm = ({ onSubmit, initialData }) => {
+const ProjectForm = ({ onSubmit, onFileChange, initialData, isUploading = false }) => {
   const [formData, setFormData] = useState({
     title: '',
     client: '',
-    deadline: '', // Formato YYYY-MM-DD para input type="date"
-    image_url: '',
+    deadline: '',
     description: '',
-    technologies: '', // String separada por vírgulas
+    image_url: '',
+    technologies: '',
     is_featured: false,
-    show_in_portfolio: true,
+    show_in_portfolio: false,
   });
 
   useEffect(() => {
+    // Popula o formulário para edição, ou o mantém vazio para criação
     if (initialData) {
       setFormData({
         id: initialData.id,
-        title: initialData.title,
-        client: initialData.client,
-        deadline: initialData.deadline ? initialData.deadline.split('T')[0] : '', // Garante formato YYYY-MM-DD
-        image_url: initialData.image_url,
-        description: initialData.description,
-        technologies: initialData.technologies ? initialData.technologies.join(', ') : '',
-        is_featured: initialData.is_featured,
-        show_in_portfolio: initialData.show_in_portfolio,
+        title: initialData.title || '',
+        client: initialData.client || '',
+        deadline: initialData.deadline || '',
+        description: initialData.description || '',
+        image_url: initialData.image_url || '',
+        technologies: Array.isArray(initialData.technologies) ? initialData.technologies.join(', ') : '',
+        is_featured: initialData.is_featured || false,
+        show_in_portfolio: initialData.show_in_portfolio || false,
       });
     } else {
-      // Limpa o formulário se não houver initialData (para novo projeto)
+      // Garante que o formulário seja limpo ao abrir para criar um novo projeto
       setFormData({
-        title: '', client: '', deadline: '', image_url: '', description: '',
-        technologies: '', is_featured: false, show_in_portfolio: true,
+        title: '', client: '', deadline: '', description: '', image_url: '',
+        technologies: '', is_featured: false, show_in_portfolio: false,
       });
     }
   }, [initialData]);
@@ -48,53 +49,65 @@ const ProjectForm = ({ onSubmit, initialData }) => {
   };
 
   return (
-    // Adicionado a classe 'project-form' ao formulário
     <form onSubmit={handleSubmit} className="project-form">
-      {/* O título do modal agora faz mais sentido estar aqui */}
-      <h2>{initialData ? 'Editar Projeto' : 'Adicionar Novo Projeto'}</h2>
+      <h2>{initialData?.id ? 'Editar Projeto' : 'Adicionar Novo Projeto'}</h2>
       
       <div className="form-group">
         <label htmlFor="title">Título do Projeto</label>
-        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required disabled={isUploading} />
       </div>
 
       <div className="form-group">
         <label htmlFor="client">Cliente</label>
-        <input type="text" id="client" name="client" value={formData.client} onChange={handleChange} required />
+        <input type="text" id="client" name="client" value={formData.client} onChange={handleChange} required disabled={isUploading} />
       </div>
 
       <div className="form-group">
         <label htmlFor="deadline">Prazo</label>
-        <input type="date" id="deadline" name="deadline" value={formData.deadline} onChange={handleChange} />
+        <input type="date" id="deadline" name="deadline" value={formData.deadline} onChange={handleChange} disabled={isUploading} />
       </div>
 
+      {/* --- CAMPO DE IMAGEM ATUALIZADO --- */}
       <div className="form-group">
-        <label htmlFor="image_url">URL da Imagem de Capa</label>
-        <input type="url" id="image_url" name="image_url" value={formData.image_url} onChange={handleChange} placeholder="https://exemplo.com/imagem.png" />
+        <label htmlFor="image_upload">Imagem de Capa</label>
+        <input
+          type="file"
+          id="image_upload"
+          name="image_upload"
+          onChange={onFileChange} // Chama a função do componente pai
+          accept="image/png, image/jpeg, image/webp"
+          disabled={isUploading}
+        />
+        {/* Mostra a imagem atual se estiver editando */}
+        {initialData?.image_url && !isUploading && (
+            <small style={{ marginTop: '0.5rem', color: 'var(--text-muted-color)' }}>
+              Imagem atual: {initialData.image_url.split('/').pop()}
+            </small>
+        )}
       </div>
 
       <div className="form-group">
         <label htmlFor="description">Descrição</label>
-        <textarea id="description" name="description" value={formData.description} onChange={handleChange} rows="4"></textarea>
+        <textarea id="description" name="description" value={formData.description} onChange={handleChange} rows="4" disabled={isUploading}></textarea>
       </div>
 
       <div className="form-group">
         <label htmlFor="technologies">Tecnologias Usadas (separadas por vírgula)</label>
-        <input type="text" id="technologies" name="technologies" value={formData.technologies} onChange={handleChange} placeholder="React, Node.js, Supabase" />
+        <input type="text" id="technologies" name="technologies" value={formData.technologies} onChange={handleChange} placeholder="React, Node.js, Supabase" disabled={isUploading} />
       </div>
       
       <div className="form-checkbox-group">
-        <input type="checkbox" id="is_featured" name="is_featured" checked={formData.is_featured} onChange={handleChange} />
+        <input type="checkbox" id="is_featured" name="is_featured" checked={formData.is_featured} onChange={handleChange} disabled={isUploading} />
         <label htmlFor="is_featured">Destacar na Homepage?</label>
       </div>
       
       <div className="form-checkbox-group">
-        <input type="checkbox" id="show_in_portfolio" name="show_in_portfolio" checked={formData.show_in_portfolio} onChange={handleChange} />
+        <input type="checkbox" id="show_in_portfolio" name="show_in_portfolio" checked={formData.show_in_portfolio} onChange={handleChange} disabled={isUploading} />
         <label htmlFor="show_in_portfolio">Mostrar no Portfólio Público?</label>
       </div>
 
-      <button type="submit" className="form-submit-button">
-        {initialData ? 'Salvar Alterações' : 'Criar Projeto'}
+      <button type="submit" className="form-submit-button" disabled={isUploading}>
+        {isUploading ? 'Enviando imagem...' : (initialData?.id ? 'Salvar Alterações' : 'Criar Projeto')}
       </button>
     </form>
   );

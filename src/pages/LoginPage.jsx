@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
@@ -14,7 +14,13 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   // Se já houver uma sessão, redireciona para a dashboard
-  if (session) navigate('/admin');
+
+ useEffect(() => {
+    // Se já houver uma sessão ativa, redireciona para a dashboard
+    if (session) {
+      navigate('/admin', { replace: true });
+    }
+  }, [session, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

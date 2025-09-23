@@ -8,6 +8,7 @@ const PortfolioPage = () => {
 
   useEffect(() => {
     const fetchPortfolioProjects = async () => {
+      // 1. Busca os dados dos projetos como antes
       const { data, error } = await supabase
         .from('projects')
         .select('*')
@@ -17,7 +18,24 @@ const PortfolioPage = () => {
       if (error) {
         console.error("Erro ao buscar projetos do portfólio:", error);
       } else {
-        setProjects(data);
+        // 2. **A CORREÇÃO ESTÁ AQUI**
+        // Mapeia os resultados e transforma o caminho da imagem em uma URL pública
+        const projectsWithUrls = data.map(project => {
+          // Se o projeto tiver um caminho de imagem salvo...
+          if (project.image_url) {
+            const { data: { publicUrl } } = supabase.storage
+              .from('project-images') // O nome do seu bucket no Supabase Storage
+              .getPublicUrl(project.image_url); // Gera a URL pública
+            
+            // Retorna o objeto do projeto com a image_url atualizada
+            return { ...project, image_url: publicUrl };
+          }
+          // Se não tiver imagem, retorna o projeto como está
+          return project;
+        });
+
+        // 3. Salva no estado a lista de projetos já com as URLs corretas
+        setProjects(projectsWithUrls);
       }
       setLoading(false);
     };
@@ -35,9 +53,6 @@ const PortfolioPage = () => {
       {loading ? (
         <p className="empty-portfolio-message">Carregando projetos...</p>
       ) : (
-        // LÓGICA ATUALIZADA AQUI:
-        // Se houver projetos, renderiza o grid.
-        // Se não, renderiza a mensagem de portfólio vazio.
         projects.length > 0 ? (
           <div className="portfolio-grid">
             {projects.map(project => (
