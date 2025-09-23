@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
 
-// Importações do Swiper para o carrossel
+// CORREÇÃO: Garantindo que todos os estilos do carrossel sejam importados
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Importação de ícones que usaremos
+// Importação de ícones
 import { FaStar, FaLaptopCode, FaMobileAlt, FaCloud, FaPalette, FaRocket, FaBug } from 'react-icons/fa';
 
-// Nome do bucket onde as imagens dos projetos são salvas
 const PROJECT_IMAGES_BUCKET = 'project-images';
 
 // --- SUB-COMPONENTES DA HOMEPAGE ---
 
 const HomePageProjectCard = ({ project }) => (
   <div className="portfolio-card">
-    {/* Usa a image_url já processada ou um placeholder */}
     <img src={project.image_url || 'https://via.placeholder.com/400x225.png?text=CODERSA'} alt={project.title} className="portfolio-card__image" />
     <div className="portfolio-card__content">
       <h3>{project.title}</h3>
@@ -45,13 +43,11 @@ const StarRatingDisplay = ({ rating }) => (
     </div>
 );
 
-
 // --- COMPONENTE PRINCIPAL DA HOMEPAGE ---
 
 const HomePage = () => {
   const [featuredProjects, setFeaturedProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
-  // Estados de carregamento separados
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [loadingTestimonials, setLoadingTestimonials] = useState(true);
 
@@ -59,28 +55,20 @@ const HomePage = () => {
   useEffect(() => {
     const fetchFeaturedProjects = async () => {
       setLoadingProjects(true);
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .eq('is_featured', true)
-        .eq('show_in_portfolio', true) // Garante que só projetos para o portfólio sejam exibidos
-        .order('created_at', { ascending: false })
-        .limit(3);
+      const { data, error } = await supabase.from('projects').select('*').eq('is_featured', true).limit(3);
 
       if (error) {
-        console.error("Erro ao buscar projetos em destaque:", error);
+        console.error("Erro ao buscar projetos:", error);
       } else {
-        // **A CORREÇÃO PARA A HOMEPAGE ESTÁ AQUI**
-        const projectsWithPublicUrls = data.map(project => {
+        // CORREÇÃO: Adicionada a lógica para transformar o caminho da imagem em URL pública
+        const projectsWithUrls = data.map(project => {
             if (project.image_url) {
-                const { data: { publicUrl } } = supabase.storage
-                    .from(PROJECT_IMAGES_BUCKET) // Usa a constante do bucket
-                    .getPublicUrl(project.image_url);
+                const { data: { publicUrl } } = supabase.storage.from(PROJECT_IMAGES_BUCKET).getPublicUrl(project.image_url);
                 return { ...project, image_url: publicUrl };
             }
             return project;
         });
-        setFeaturedProjects(projectsWithPublicUrls);
+        setFeaturedProjects(projectsWithUrls);
       }
       setLoadingProjects(false);
     };
@@ -91,10 +79,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
         setLoadingTestimonials(true);
-        const { data, error } = await supabase
-            .from('testimonials')
-            .select('*')
-            .eq('is_approved', true);
+        const { data, error } = await supabase.from('testimonials').select('*').eq('is_approved', true);
         
         if (error) console.error("Erro ao buscar avaliações:", error);
         else setTestimonials(data);
@@ -104,15 +89,16 @@ const HomePage = () => {
   }, []);
   
   const servicesData = [
-    { title: 'Desenvolvimento Web Customizado', description: 'Construímos sites e aplicações web únicas, modernas e de alta performance.', icon: <FaLaptopCode size={40}/> },
+     { title: 'Desenvolvimento Web Customizado', description: 'Construímos sites e aplicações web únicas, modernas e de alta performance.', icon: <FaLaptopCode size={40}/> },
     { title: 'Desenvolvimento de Aplicativos Mobile', description: 'Criamos aplicativos nativos e híbridos para iOS e Android.', icon: <FaMobileAlt size={40}/> },
     { title: 'Soluções em Nuvem e DevOps', description: 'Implementamos infraestruturas robustas em nuvem e automatizamos seus processos.', icon: <FaCloud size={40}/> },
-    { title: 'Design UX/UI', description: 'Desenvolvemos interfaces de usuário bonitas e fáceis de usar.', icon: <FaPalette size={40}/> },
-    { title: 'Otimização de Performance e SEO', description: 'Melhoramos a velocidade do seu site e a visibilidade nos motores de busca.', icon: <FaRocket size={40}/> },
-    { title: 'Consultoria e Suporte Técnico', description: 'Oferecemos consultoria especializada e suporte contínuo para seus sistemas.', icon: <FaBug size={40}/> }
+    { title: 'Design UX/UI', description: 'Desenvolvemos interfaces de usuário bonitas e fáceis de usar, centradas no usuário.', icon: <FaPalette size={40}/> },
+    { title: 'Otimização de Performance e SEO', description: 'Melhoramos a velocidade do seu site e a visibilidade nos motores de busca para atrair mais clientes.', icon: <FaRocket size={40}/> },
+    { title: 'Consultoria e Suporte Técnico', description: 'Oferecemos consultoria especializada e suporte contínuo para garantir o funcionamento impecável dos seus sistemas.', icon: <FaBug size={40}/> }
   ];
 
-  const heroBackgroundImageUrl = '/images/hero-background.jpg'; // Altere para a sua imagem
+  // VERIFIQUE SE ESTE CAMINHO E NOME DE ARQUIVO ESTÃO CORRETOS!
+  const heroBackgroundImageUrl = '/images/gradiente.jpg';
 
   return (
     <>
@@ -128,11 +114,13 @@ const HomePage = () => {
       </section>
 
       {/* --- SEÇÃO DE SERVIÇOS --- */}
-      <section id="services" className="container services-section">
-        <h2 className="section-title">Nossos Serviços</h2>
-        <p className="section-subtitle">Soluções tecnológicas completas para impulsionar seu negócio.</p>
+      <section id="services" className="container">
+        <div className="section-header">
+          <h2>Soluções Sob Medida</h2>
+          <p>Oferecemos um conjunto completo de serviços de desenvolvimento, da concepção à implementação.</p>
+        </div>
         <div className="services-grid">
-            {servicesData.map((service, index) => <ServiceCard key={index} {...service} />)}
+            {servicesData.map(service => <ServiceCard key={service.title} {...service} />)}
         </div>
       </section>
 
@@ -141,50 +129,47 @@ const HomePage = () => {
         <div className="container">
           <div className="about-us-grid">
             <div className="about-us-image">
-              <img src="/images/equipe-codersa.jpg" alt="Equipe da CODERSA trabalhando em projetos" />
+              {/* VERIFIQUE SE ESTE CAMINHO E NOME DE ARQUIVO ESTÃO CORRETOS! */}
+              <img src="/images/gradiente.jpg" alt="Equipe da CODERSA trabalhando em projetos" />
             </div>
             <div className="about-us-content">
               <h2>Apaixonados por Código e Inovação</h2>
-              <p>
-                A CODERSA nasceu da visão de que a tecnologia pode transformar negócios. Somos mais do que desenvolvedores; somos parceiros estratégicos que mergulham nos desafios dos nossos clientes para construir soluções de software robustas, escaláveis e intuitivas.
-              </p>
-              <p>
-                Nossa missão é transformar ideias complexas em produtos digitais de sucesso, utilizando as melhores tecnologias e uma abordagem colaborativa.
-              </p>
-              <Link to="/contato" className="about-us-button">
-                Fale Conosco
-              </Link>
+              <p>Somos parceiros estratégicos que mergulham nos desafios dos nossos clientes para construir soluções de software robustas, escaláveis e intuitivas.</p>
+              <Link to="/contato" className="about-us-button">Fale Conosco</Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- SEÇÃO DE PORTFÓLIO --- */}
-      <section id="portfolio" className="container portfolio-section">
-        <h2 className="section-title">Projetos em Destaque</h2>
-        <p className="section-subtitle">Confira alguns dos projetos que tivemos o prazer de desenvolver.</p>
-        {loadingProjects ? (
-          <p className="empty-portfolio-message">Carregando projetos...</p>
-        ) : (
-          featuredProjects.length > 0 ? (
-            <div className="portfolio-grid">
-              {featuredProjects.map(project => ( <HomePageProjectCard key={project.id} project={project} /> ))}
+      <section id="portfolio" style={{backgroundColor: 'var(--white)'}}>
+        <div className="container">
+            <div className="section-header">
+                <h2>Portfólio de Projetos em Destaque</h2>
+                <p>Confira alguns dos projetos que tivemos o prazer de desenvolver.</p>
             </div>
-          ) : (
-            <p className="empty-portfolio-message">Nenhum projeto em destaque no momento.</p>
-          )
-        )}
+            {loadingProjects ? (
+              <p className="empty-portfolio-message">Carregando projetos...</p>
+            ) : (
+              featuredProjects.length > 0 ? (
+                <div className="portfolio-grid">
+                  {featuredProjects.map(project => ( <HomePageProjectCard key={project.id} project={project} /> ))}
+                </div>
+              ) : (
+                <p className="empty-portfolio-message">Nenhum projeto em destaque no momento.</p>
+              )
+            )}
+        </div>
       </section>
 
       {/* --- SEÇÃO DE AVALIAÇÕES --- */}
       {loadingTestimonials ? (
-        <div className="container" style={{textAlign: 'center', padding: '2rem 0'}}>
-            <p>Carregando avaliações...</p>
-        </div>
+        <div className="container" style={{textAlign: 'center', padding: '2rem 0'}}><p>Carregando avaliações...</p></div>
       ) : testimonials.length > 0 && (
-          <section id="testimonials" className="container testimonials-section">
-              <h2 className="section-title">O Que Nossos Clientes Dizem</h2>
-              <p className="section-subtitle">Depoimentos de quem já confiou na CODERSA.</p>
+          <section id="testimonials" className="container">
+              <div className="section-header">
+                  <h2>O Que Nossos Clientes Dizem</h2>
+              </div>
               <Swiper
                   modules={[Navigation, Pagination, Autoplay]}
                   spaceBetween={30}
@@ -200,16 +185,14 @@ const HomePage = () => {
                       <SwiperSlide key={item.id}>
                           <div className="testimonial-card">
                               <StarRatingDisplay rating={item.rating} />
-                              <p className="testimonial-text">"{item.message}"</p>
-                              <p className="testimonial-author">- {item.client_name}</p>
-                              <p className="testimonial-position">{item.company_position}</p>
+                              {/* CORREÇÃO: Trocado 'testimonial.message' por 'testimonial.quote' */}
+                              <p className="quote">"{item.quote}"</p>
+                              <p className="author">{item.client_name}</p>
+                              <p className="position">{item.company_position}</p>
                           </div>
                       </SwiperSlide>
                   ))}
               </Swiper>
-              <div className="leave-review">
-                  <Link to="/avaliar" className="button button-secondary">Deixar uma Avaliação</Link>
-              </div>
           </section>
       )}
     </>
