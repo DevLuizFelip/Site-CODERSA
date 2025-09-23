@@ -621,3 +621,62 @@ body.dark .theme-toggle-button {
   background-color: var(--primary-color);
   color: var(--white);
 }
+/* === ESTILOS PARA O CARROSSEL DE PORTFÓLIO === */
+
+.portfolio-swiper {
+  padding-bottom: 3rem !important; /* Espaço para a paginação não ficar colada nos cards */
+}
+
+/* Estiliza as setas de navegação (próximo/anterior) */
+.portfolio-swiper .swiper-button-next,
+.portfolio-swiper .swiper-button-prev {
+  color: var(--primary-color);
+  --swiper-navigation-size: 28px; /* Tamanho das setas */
+}
+
+/* Garante que as setas fiquem visíveis no dark mode */
+body.dark .portfolio-swiper .swiper-button-next,
+body.dark .portfolio-swiper .swiper-button-prev {
+    color: var(--text-color);
+}
+
+/* Estiliza as bolinhas da paginação */
+.portfolio-swiper .swiper-pagination-bullet-active {
+  background-color: var(--primary-color);
+}
+/* Em src/index.css */
+
+/* --- CORREÇÃO PARA ALTURA IGUAL NOS CARDS DO CARROSSEL --- */
+
+/* Garante que o slide (o container de cada card no carrossel) seja flexível */
+.portfolio-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+/* 1. Força o card a usar 100% da altura disponível no slide */
+.portfolio-card {
+  display: flex;
+  flex-direction: column; /* Organiza o conteúdo (imagem, texto) em uma coluna */
+  width: 100%;
+  height: 100%; /* A MUDANÇA MAIS IMPORTANTE: faz o card esticar */
+}
+
+/* 2. Faz o conteúdo de texto também usar o espaço vertical de forma flexível */
+.portfolio-card__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Faz esta área crescer para ocupar o espaço restante */
+}
+
+/* 3. Faz o parágrafo da descrição crescer, empurrando o link para baixo */
+.portfolio-card__content p {
+  flex-grow: 1; /* O truque final: o parágrafo se expande e alinha os links na base */
+}
+
+/* Garante que a imagem tenha uma altura fixa e consistente */
+.portfolio-card__image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}

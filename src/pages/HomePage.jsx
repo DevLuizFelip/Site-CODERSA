@@ -55,7 +55,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchFeaturedProjects = async () => {
       setLoadingProjects(true);
-      const { data, error } = await supabase.from('projects').select('*').eq('is_featured', true).limit(3);
+      const { data, error } = await supabase.from('projects').select('*').eq('is_featured', true).limit(6);
 
       if (error) {
         console.error("Erro ao buscar projetos:", error);
@@ -142,7 +142,7 @@ const HomePage = () => {
       </section>
 
       {/* --- SEÇÃO DE PORTFÓLIO --- */}
-      <section id="portfolio" style={{backgroundColor: 'var(--white)'}}>
+     <section id="portfolio" style={{backgroundColor: 'var(--white)'}}>
         <div className="container">
             <div className="section-header">
                 <h2>Portfólio de Projetos em Destaque</h2>
@@ -152,16 +152,35 @@ const HomePage = () => {
               <p className="empty-portfolio-message">Carregando projetos...</p>
             ) : (
               featuredProjects.length > 0 ? (
-                <div className="portfolio-grid">
-                  {featuredProjects.map(project => ( <HomePageProjectCard key={project.id} project={project} /> ))}
-                </div>
+                // O div do grid foi substituído pelo componente Swiper
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={30}
+                  slidesPerView={1}
+                  navigation={true} // Habilita as setas de navegação
+                  pagination={{ clickable: true }}
+                  breakpoints={{
+                      640: {
+                        slidesPerView: 2,
+                      },
+                      1024: {
+                        slidesPerView: 3,
+                      },
+                  }}
+                  className="portfolio-swiper" // Classe para estilização customizada
+                >
+                  {featuredProjects.map(project => (
+                    <SwiperSlide key={project.id}>
+                      <HomePageProjectCard project={project} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               ) : (
                 <p className="empty-portfolio-message">Nenhum projeto em destaque no momento.</p>
               )
             )}
         </div>
       </section>
-
       {/* --- SEÇÃO DE AVALIAÇÕES --- */}
       {loadingTestimonials ? (
         <div className="container" style={{textAlign: 'center', padding: '2rem 0'}}><p>Carregando avaliações...</p></div>
