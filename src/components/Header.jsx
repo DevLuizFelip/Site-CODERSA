@@ -13,7 +13,7 @@ const Header = () => {
           <span>CODER&SA</span>
         </Link>
         <nav className="header-nav">
-          <NavLink to="/#services">Serviços</NavLink>
+          <NavLink to="/contato">Serviços</NavLink>
           <NavLink to="/portfolio">Projetos</NavLink>
           <NavLink to="/contato">Contato</NavLink>
         </nav>

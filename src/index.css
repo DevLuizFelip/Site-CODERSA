@@ -564,3 +564,60 @@ body.dark .theme-toggle-button {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
+/* === ESTILOS PARA A SEÇÃO 'QUEM SOMOS' === */
+.about-us-section {
+  /* Adiciona um padding e uma cor de fundo sutil para diferenciar a seção */
+  padding: 4rem 0;
+  background-color: var(--surface-color); 
+}
+
+.about-us-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Uma coluna por padrão (mobile) */
+  gap: 3rem; /* Espaço entre a imagem e o texto */
+  align-items: center;
+}
+
+/* Em telas maiores (desktops), o layout muda para duas colunas */
+@media (min-width: 768px) {
+  .about-us-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-us-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem; /* Bordas arredondadas na imagem */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-content h2 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.about-us-content p {
+  color: var(--text-muted-color);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.about-us-button {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-us-button:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}

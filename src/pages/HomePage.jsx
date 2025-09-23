@@ -98,6 +98,29 @@ const HomePage = () => {
             {servicesData.map(service => <ServiceCard key={service.title} {...service} />)}
         </div>
       </section>
+{/* --- NOVA SEÇÃO 'QUEM SOMOS' --- */}
+       <section id="about-us" className="about-us-section">
+        <div className="container">
+          <div className="about-us-grid">
+            <div className="about-us-image">
+              {/* IMPORTANTE: Coloque uma imagem da sua equipe ou escritório na pasta public/images */}
+              <img src="././public/gradiente.jpg" alt="Equipe da CODERSA trabalhando em projetos" />
+            </div>
+            <div className="about-us-content">
+              <h2>Apaixonados por Código e Inovação</h2>
+              <p>
+                A CODERSA nasceu da visão de que a tecnologia pode transformar negócios. Somos mais do que desenvolvedores; somos parceiros estratégicos que mergulham nos desafios dos nossos clientes para construir soluções de software robustas, escaláveis e intuitivas.
+              </p>
+              <p>
+                Nossa missão é transformar ideias complexas em produtos digitais de sucesso, utilizando as melhores tecnologias e uma abordagem colaborativa.
+              </p>
+              <Link to="/contato" className="about-us-button">
+                Fale Conosco
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* --- SEÇÃO DE PORTFÓLIO --- */}
       <section id="portfolio" style={{backgroundColor: 'var(--white)'}}>
