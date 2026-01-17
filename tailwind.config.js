@@ -8,15 +8,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#138aec",
-        "background-light": "#f6f7f8",
-        "background-dark": "#101a22",
-        "text-light": "#182733",
-        "text-muted": "#475f70",
+        "primary": "var(--primary-color)",
+        "primary-hover": "var(--primary-hover-color)",
+        "background-light": "var(--background-color)",
+        "background-dark": "var(--surface-color)", // Ajuste semântico
+        "surface": "var(--surface-color)",
+        "text-main": "var(--text-color)",
+        "text-muted": "var(--text-muted-color)",
+        "border": "var(--border-color)",
       },
       fontFamily: {
-        "display": ["Manrope", "sans-serif"]
+        "sans": ["Montserrat", "sans-serif"],
+        "serif": ["Playfair Display", "serif"],
+        "display": ["Playfair Display", "serif"]
       },
+      letterSpacing: {
+        widest: '.25em', // Para o subtítulo "ENGENHARIA DE..."
+      }
     },
   },
   plugins: [

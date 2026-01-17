@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Codersa - Serviços</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a1a1a",
+                        "secondary": "#4a4a4a",
+                        "accent": "#d4af37",
+                        "background-page": "#ffffff",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Lato", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-page text-primary font-sans antialiased;
+            }
+        }
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden selection:bg-black selection:text-white">
+<div class="w-full bg-white/80 backdrop-blur-md sticky top-0 z-50 pt-6 pb-4 px-6 border-b border-gray-100">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-1 rounded-sm">
+<span class="material-symbols-outlined text-2xl block">terminal</span>
+</div>
+<h2 class="text-2xl font-serif font-bold tracking-tight">Codersa</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-10 items-center">
+<nav class="flex gap-8">
+<a class="text-xs uppercase tracking-[0.2em] font-bold hover:text-gray-500 transition-colors" href="#">Início</a>
+<a class="text-xs uppercase tracking-[0.2em] font-bold text-black border-b border-black" href="#">Serviços</a>
+<a class="text-xs uppercase tracking-[0.2em] font-bold hover:text-gray-500 transition-colors" href="#">Cases</a>
+<a class="text-xs uppercase tracking-[0.2em] font-bold hover:text-gray-500 transition-colors" href="#">Contato</a>
+</nav>
+<button class="bg-primary text-white px-8 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-all duration-300">
+                Orçamento
+            </button>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex justify-center py-16 px-4 md:px-6">
+<div class="flex flex-col lg:flex-row gap-16 max-w-[1100px] w-full items-start">
+<div class="flex-1 w-full">
+<div class="mb-14 text-center lg:text-left">
+<span class="block text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">Crafting Digital Excellence</span>
+<h1 class="text-5xl md:text-7xl font-serif font-medium leading-tight mb-6 text-primary">
+                    Nossos <span class="italic">Serviços</span>.
+                </h1>
+<p class="text-gray-500 text-xl font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Soluções de engenharia e design de alto contraste para empresas que buscam o excepcional. Transformamos complexidade em simplicidade elegante.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="service-card group flex flex-col justify-between p-10 h-[400px] bg-primary text-white border border-primary relative overflow-hidden">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-6 font-light opacity-80">code</span>
+<h3 class="text-2xl font-serif italic mb-4">Desenvolvimento Customizado</h3>
+<p class="text-gray-400 font-light leading-relaxed">Sistemas robustos e escaláveis construídos sob medida para os desafios únicos do seu negócio.</p>
+</div>
+<div class="z-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-bold group-hover:gap-4 transition-all">
+                        Ver Detalhes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="service-card group flex flex-col justify-between p-10 h-[400px] bg-white text-primary border border-gray-200 relative overflow-hidden">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-6 font-light opacity-60">psychology</span>
+<h3 class="text-2xl font-serif italic mb-4">Inteligência Artificial</h3>
+<p class="text-gray-500 font-light leading-relaxed">Implementação de modelos generativos e automação inteligente para otimizar processos críticos.</p>
+</div>
+<div class="z-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-bold group-hover:gap-4 transition-all">
+                        Ver Detalhes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="service-card group flex flex-col justify-between p-10 h-[400px] bg-white text-primary border border-gray-200 relative overflow-hidden">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-6 font-light opacity-60">cloud_done</span>
+<h3 class="text-2xl font-serif italic mb-4">Cloud &amp; Infra</h3>
+<p class="text-gray-500 font-light leading-relaxed">Arquitetura em nuvem segura e resiliente, garantindo alta disponibilidade e performance global.</p>
+</div>
+<div class="z-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-bold group-hover:gap-4 transition-all">
+                        Ver Detalhes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="service-card group flex flex-col justify-between p-10 h-[400px] bg-primary text-white border border-primary relative overflow-hidden">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-6 font-light opacity-80">draw</span>
+<h3 class="text-2xl font-serif italic mb-4">Consultoria UX/UI</h3>
+<p class="text-gray-400 font-light leading-relaxed">Design de interfaces premium focado na experiência do usuário e na estética minimalista.</p>
+</div>
+<div class="z-10 flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-bold group-hover:gap-4 transition-all">
+                        Ver Detalhes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-12 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8">
+<div>
+<h4 class="font-serif text-2xl italic">Pronto para o próximo nível?</h4>
+<p class="text-gray-500 font-light mt-1">Agende uma consultoria técnica com nossos especialistas.</p>
+</div>
+<button class="bg-primary text-white h-14 px-10 font-bold uppercase tracking-[0.2em] hover:bg-gray-800 transition-all shadow-xl shadow-gray-200 flex items-center gap-4">
+                    Fale Conosco
+                    <span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</div>
+<aside class="hidden lg:block w-80 xl:w-96 shrink-0 sticky top-32">
+<div class="bg-white border border-gray-100 p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] relative overflow-hidden">
+<div class="border-b border-gray-100 pb-6 mb-8">
+<h4 class="font-serif text-xl italic text-primary">Destaques do Mês</h4>
+<p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] mt-2 font-bold">Relatório de Inovação</p>
+</div>
+<div class="space-y-10">
+<div>
+<p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-4">Foco em Performance</p>
+<div class="space-y-4">
+<div class="flex items-start gap-3 group cursor-pointer">
+<div class="w-1.5 h-1.5 rounded-full bg-black mt-2"></div>
+<div>
+<span class="text-sm font-medium block text-primary">Otimização de Latência</span>
+<span class="text-xs text-gray-400 italic">Redução de 40% em APIs</span>
+</div>
+</div>
+<div class="flex items-start gap-3 group cursor-pointer">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2"></div>
+<div>
+<span class="text-sm font-medium block text-primary">Segurança Cloud-Native</span>
+<span class="text-xs text-gray-400 italic">Zero Trust Architecture</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-4">Stack Tecnológica</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-primary">React Next.js</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-primary">Python AI</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-primary">AWS EKS</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-primary">Tailwind CSS</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-primary">Terraform</span>
+</div>
+</div>
+<div class="bg-gray-50 p-6 border-l-2 border-primary">
+<p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-2">Próximo Workshop</p>
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined font-light text-xl">event</span>
+<span class="font-serif italic text-sm">IA Generativa na Prática</span>
+</div>
+<p class="text-xs text-gray-400 mt-2">24 de Setembro, 19:00</p>
+</div>
+</div>
+<div class="mt-10 pt-6 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Time Online</span>
+</div>
+<div class="flex gap-4 text-gray-400">
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-lg">mail</span></a>
+</div>
+</div>
+</div>
+<div class="text-center mt-8">
+<p class="font-serif italic text-gray-400 text-sm">"Inovação é a nossa linguagem padrão."</p>
+</div>
+</aside>
+</div>
+</div>
+<footer class="border-t border-gray-100 py-12 px-6">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl text-primary">terminal</span>
+<span class="text-sm font-serif font-bold italic tracking-wide">Codersa</span>
+</div>
+<p class="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">© 2024 Codersa Engineering. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-[10px] uppercase tracking-widest font-bold hover:text-black transition-colors text-gray-400" href="#">LinkedIn</a>
+<a class="text-[10px] uppercase tracking-widest font-bold hover:text-black transition-colors text-gray-400" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+
+</body></html>

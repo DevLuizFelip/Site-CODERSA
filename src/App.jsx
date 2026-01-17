@@ -5,6 +5,9 @@ import { Toaster } from 'react-hot-toast';
 // Importações do Site Público
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import AboutPage from './pages/AboutPage';
+import ProcessPage from './pages/ProcessPage';
 import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import LeaveReviewPage from './pages/LeaveReviewPage';
@@ -43,6 +46,9 @@ function App() {
         {/* Rotas do Site Principal (Públicas) */}
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="servicos" element={<ServicesPage />} />
+          <Route path="sobre" element={<AboutPage />} />
+          <Route path="processo" element={<ProcessPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
           <Route path="contato" element={<ContactPage />} />
           <Route path="avaliar" element={<LeaveReviewPage />} />
