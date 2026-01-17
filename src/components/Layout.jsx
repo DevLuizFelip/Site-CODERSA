@@ -11,15 +11,19 @@ const Layout = () => {
 
   useEffect(() => {
     const checkMaintenanceStatus = async () => {
-      // Busca a configuração do banco de dados
-      const { data, error } = await supabase
-        .from('site_settings')
-        .select('maintenance_mode')
-        .eq('id', 1)
-        .single();
-      
-      if (data) {
-        setMaintenanceMode(data.maintenance_mode);
+      // Ocultando erro se a tabela não existir ainda na migração
+      try {
+        const { data } = await supabase
+          .from('site_settings')
+          .select('maintenance_mode')
+          .eq('id', 1)
+          .single();
+        
+        if (data) {
+          setMaintenanceMode(data.maintenance_mode);
+        }
+      } catch (e) {
+        console.log('Tabela de configurações ainda não criada');
       }
       setLoading(false);
     };
@@ -27,21 +31,15 @@ const Layout = () => {
     checkMaintenanceStatus();
   }, []);
 
-  // Enquanto verifica, mostra uma tela em branco ou um loader
-  if (loading) {
-    return <div></div>; // Ou um componente de spinner
-  }
+  if (loading) return null;
 
-  // Se o modo de manutenção estiver ATIVO, mostra a página de manutenção
-  if (maintenanceMode) {
-    return <MaintenancePage />;
-  }
+  if (maintenanceMode) return <MaintenancePage />;
 
-  // Se estiver DESATIVADO, mostra o site normal
   return (
-    <div className="site-wrapper">
+    <div className="flex flex-col min-h-screen bg-background text-text transition-colors duration-500">
       <Header />
-      <main>
+      {/* O main cresce para empurrar o footer para baixo */}
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />
