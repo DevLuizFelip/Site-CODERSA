@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 app = Flask(__name__)
 # CORS explícito para o domínio de produção + localhost
@@ -26,6 +28,7 @@ CORS(
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
 RESEND_FROM = os.environ.get("RESEND_FROM", "onboarding@resend.dev")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
+RESEND_API_URL = os.environ.get("RESEND_API_URL", "https://api.resend.com/emails")
 
 def load_template(nome, email, assunto, mensagem):
     # Caminho absoluto para evitar erros de arquivo não encontrado
@@ -63,14 +66,18 @@ def send_email():
             "html": html_content,
         }
 
-        response = requests.post(
-            "https://api.resend.com/emails",
+        session = requests.Session()
+        retries = Retry(total=2, backoff_factor=0.5, status_forcelist=[429, 500, 502, 503, 504])
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        response = session.post(
+            RESEND_API_URL,
             headers={
                 "Authorization": f"Bearer {RESEND_API_KEY}",
                 "Content-Type": "application/json",
             },
             json=payload,
-            timeout=20,
+            timeout=(5, 40),
         )
 
         if response.status_code >= 400:
