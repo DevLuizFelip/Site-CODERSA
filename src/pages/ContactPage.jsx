@@ -92,7 +92,7 @@ const ContactPage = () => {
                   <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-4">Links Rápidos</p>
                   <div className="space-y-4">
                     <SidebarLink href="#" icon={<BsFileEarmarkPdf className="text-lg" />} title="Baixar Portfólio" subtitle="PDF, 4.2 MB" />
-                    <SidebarLink href="#" icon={<BsClock className="text-lg" />} title="Agendar Demo" subtitle="Call de 15 min" />
+                    <SidebarLink href="https://cal.com/codersa/23min" icon={<BsClock className="text-lg" />} title="Agendar First Call" subtitle="Call de 23 min" />
                   </div>
                 </div>
 
@@ -194,7 +194,7 @@ const ContactPage = () => {
                 <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold mb-4">Links Rápidos</p>
                 <div className="space-y-4">
                   <SidebarLink href="#" icon={<BsFileEarmarkPdf className="text-lg" />} title="Baixar Portfólio" subtitle="PDF, 4.2 MB" />
-                  <SidebarLink href="#" icon={<BsClock className="text-lg" />} title="Agendar Demo" subtitle="Call de 15 min" />
+                  <SidebarLink href="https://cal.com/codersa/23min" icon={<BsClock className="text-lg" />} title="Agendar First Call" subtitle="Call de 23 min" />
                 </div>
               </div>
               
@@ -217,8 +217,12 @@ const ContactPage = () => {
                 <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Especialistas Ativos</span>
               </div>
               <div className="flex gap-4 text-gray-400">
-                <a href="#" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
-                <a href="#" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+              </div>
+              <div className="flex gap-4 text-gray-400">
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
               </div>
             </div>
           </div>
