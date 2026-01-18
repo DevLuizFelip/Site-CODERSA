@@ -26,7 +26,7 @@ CORS(
 
 # Configurações via Resend (Variáveis de Ambiente)
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
-RESEND_FROM = os.environ.get("RESEND_FROM", "onboarding@resend.dev")
+RESEND_FROM = os.environ.get("RESEND_FROM", "Codersa <onboarding@resend.dev>")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
 RESEND_API_URL = os.environ.get("RESEND_API_URL", "https://api.resend.com/emails")
 
@@ -56,6 +56,8 @@ def send_email():
     email_cliente = data.get('email')
     assunto = data.get('assunto')
     mensagem_texto = data.get('mensagem')
+    if not nome or not email_cliente or not assunto or not mensagem_texto:
+        return jsonify({"success": False, "message": "Campos obrigatórios ausentes."}), 400
 
     try:
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
@@ -64,6 +66,7 @@ def send_email():
             "to": [DESTINATION_EMAIL],
             "subject": f"Novo Contato: {assunto}",
             "html": html_content,
+            "reply_to": email_cliente,
         }
 
         session = requests.Session()
@@ -81,7 +84,11 @@ def send_email():
         )
 
         if response.status_code >= 400:
-            return jsonify({"success": False, "message": response.text}), 500
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {"raw": response.text}
+            return jsonify({"success": False, "message": error_payload}), 500
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
 
