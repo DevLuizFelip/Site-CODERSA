@@ -35,7 +35,7 @@ const ContactPage = () => {
         );
         // Redireciona para o WhatsApp após enviar com sucesso
         setTimeout(() => {
-          window.location.href = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+          window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank', 'noopener,noreferrer');
         }, 800);
       } else {
         alert('Erro ao enviar email. Tente novamente.');
