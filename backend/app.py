@@ -6,11 +6,18 @@ from email.mime.multipart import MIMEMultipart
 import os
 
 app = Flask(__name__)
-CORS(app)
+# CORS explícito para o domínio de produção + localhost
+CORS(app, resources={r"/send-email": {"origins": [
+    "https://www.codersa.com.br",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175"
+]}})
 
 # Configurações via Variáveis de Ambiente (Segurança)
 SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
+# Gmail: 465 (SSL) costuma ser mais estável em produção
+SMTP_PORT = 465
 EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
@@ -51,11 +58,10 @@ def send_email():
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
         msg.attach(MIMEText(html_content, 'html'))
 
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.send_message(msg)
-        server.quit()
+        # Conexão com timeout para evitar worker travar
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=20) as server:
+            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            server.send_message(msg)
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
 
