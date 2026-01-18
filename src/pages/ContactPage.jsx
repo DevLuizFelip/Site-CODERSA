@@ -217,12 +217,12 @@ const ContactPage = () => {
                 <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Especialistas Ativos</span>
               </div>
               <div className="flex gap-4 text-gray-400">
-                <a href="https://codersa.ai.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer"><BsGlobe className="text-lg" /></a>
-                <a href="mailto:contato@codersa.ai.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
               </div>
               <div className="flex gap-4 text-gray-400">
-                <a href="https://codersa.ai.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer"><BsGlobe className="text-lg" /></a>
-                <a href="mailto:contato@codersa.ai.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
               </div>
             </div>
           </div>
