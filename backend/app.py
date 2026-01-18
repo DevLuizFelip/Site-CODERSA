@@ -1,9 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import os
+import requests
 
 app = Flask(__name__)
 # CORS explícito para o domínio de produção + localhost
@@ -24,12 +22,9 @@ CORS(
     },
 )
 
-# Configurações via Variáveis de Ambiente (Segurança)
-SMTP_SERVER = "smtp.gmail.com"
-# Gmail: 465 (SSL) costuma ser mais estável em produção
-SMTP_PORT = 465
-EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
-EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+# Configurações via Resend (Variáveis de Ambiente)
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
+RESEND_FROM = os.environ.get("RESEND_FROM", "onboarding@resend.dev")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
 
 def load_template(nome, email, assunto, mensagem):
@@ -50,8 +45,8 @@ def load_template(nome, email, assunto, mensagem):
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
-    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-        return jsonify({"success": False, "message": "Configuração de servidor incompleta."}), 500
+    if not RESEND_API_KEY:
+        return jsonify({"success": False, "message": "RESEND_API_KEY não configurada."}), 500
 
     data = request.json
     nome = data.get('nome')
@@ -60,18 +55,26 @@ def send_email():
     mensagem_texto = data.get('mensagem')
 
     try:
-        msg = MIMEMultipart()
-        msg['From'] = EMAIL_ADDRESS
-        msg['To'] = DESTINATION_EMAIL
-        msg['Subject'] = f"Novo Contato: {assunto}"
-
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
-        msg.attach(MIMEText(html_content, 'html'))
+        payload = {
+            "from": RESEND_FROM,
+            "to": [DESTINATION_EMAIL],
+            "subject": f"Novo Contato: {assunto}",
+            "html": html_content,
+        }
 
-        # Conexão com timeout para evitar worker travar
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=20) as server:
-            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.send_message(msg)
+        response = requests.post(
+            "https://api.resend.com/emails",
+            headers={
+                "Authorization": f"Bearer {RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json=payload,
+            timeout=20,
+        )
+
+        if response.status_code >= 400:
+            return jsonify({"success": False, "message": response.text}), 500
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
 
