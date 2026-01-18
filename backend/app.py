@@ -7,12 +7,22 @@ import os
 
 app = Flask(__name__)
 # CORS explícito para o domínio de produção + localhost
-CORS(app, resources={r"/send-email": {"origins": [
-    "https://www.codersa.com.br",
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:5175"
-]}})
+CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": [
+                "https://www.codersa.com.br",
+                "https://codersa.com.br",
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "http://localhost:5175",
+            ],
+            "methods": ["POST", "OPTIONS"],
+            "allow_headers": ["Content-Type"],
+        }
+    },
+)
 
 # Configurações via Variáveis de Ambiente (Segurança)
 SMTP_SERVER = "smtp.gmail.com"
