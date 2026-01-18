@@ -29,6 +29,14 @@ const ContactPage = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
+        const whatsappNumber = '5511936193760';
+        const whatsappMessage = encodeURIComponent(
+          'Olá! Acabei de enviar o formulário e gostaria de falar sobre minha solicitação.'
+        );
+        // Redireciona para o WhatsApp após enviar com sucesso
+        setTimeout(() => {
+          window.location.href = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+        }, 800);
       } else {
         alert('Erro ao enviar email. Tente novamente.');
       }
