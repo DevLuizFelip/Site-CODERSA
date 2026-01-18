@@ -84,10 +84,12 @@ def send_email():
         )
 
         if response.status_code >= 400:
+            # Log detalhado para diagnóstico no Render
             try:
                 error_payload = response.json()
             except Exception:
                 error_payload = {"raw": response.text}
+            print(f"Resend erro {response.status_code}: {error_payload}")
             return jsonify({"success": False, "message": error_payload}), 500
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
