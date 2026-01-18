@@ -24,11 +24,12 @@ CORS(
     },
 )
 
-# Configurações via Resend (Variáveis de Ambiente)
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
-RESEND_FROM = os.environ.get("RESEND_FROM", "Codersa <onboarding@resend.dev>")
+# Configurações via MailerSend (Variáveis de Ambiente)
+MAILERSEND_API_KEY = os.environ.get("MAILERSEND_API_KEY")
+MAILERSEND_FROM_EMAIL = os.environ.get("MAILERSEND_FROM_EMAIL")
+MAILERSEND_FROM_NAME = os.environ.get("MAILERSEND_FROM_NAME", "Codersa")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "luicostasantana@outlook.com")
-RESEND_API_URL = os.environ.get("RESEND_API_URL", "https://api.resend.com/emails")
+MAILERSEND_API_URL = os.environ.get("MAILERSEND_API_URL", "https://api.mailersend.com/v1/email")
 
 def load_template(nome, email, assunto, mensagem):
     # Caminho absoluto para evitar erros de arquivo não encontrado
@@ -48,8 +49,8 @@ def load_template(nome, email, assunto, mensagem):
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
-    if not RESEND_API_KEY:
-        return jsonify({"success": False, "message": "RESEND_API_KEY não configurada."}), 500
+    if not MAILERSEND_API_KEY or not MAILERSEND_FROM_EMAIL:
+        return jsonify({"success": False, "message": "MAILERSEND_API_KEY/MAILERSEND_FROM_EMAIL não configuradas."}), 500
 
     data = request.json
     nome = data.get('nome')
@@ -62,11 +63,14 @@ def send_email():
     try:
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
         payload = {
-            "from": RESEND_FROM,
-            "to": [DESTINATION_EMAIL],
+            "from": {
+                "email": MAILERSEND_FROM_EMAIL,
+                "name": MAILERSEND_FROM_NAME,
+            },
+            "to": [{"email": DESTINATION_EMAIL, "name": "Codersa"}],
             "subject": f"Novo Contato: {assunto}",
             "html": html_content,
-            "reply_to": email_cliente,
+            "reply_to": {"email": email_cliente},
         }
 
         session = requests.Session()
@@ -74,9 +78,9 @@ def send_email():
         session.mount("https://", HTTPAdapter(max_retries=retries))
 
         response = session.post(
-            RESEND_API_URL,
+            MAILERSEND_API_URL,
             headers={
-                "Authorization": f"Bearer {RESEND_API_KEY}",
+                "Authorization": f"Bearer {MAILERSEND_API_KEY}",
                 "Content-Type": "application/json",
             },
             json=payload,
@@ -89,7 +93,7 @@ def send_email():
                 error_payload = response.json()
             except Exception:
                 error_payload = {"raw": response.text}
-            print(f"Resend erro {response.status_code}: {error_payload}")
+            print(f"MailerSend erro {response.status_code}: {error_payload}")
             return jsonify({"success": False, "message": error_payload}), 500
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
