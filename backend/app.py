@@ -6,25 +6,24 @@ from email.mime.multipart import MIMEMultipart
 import os
 
 app = Flask(__name__)
-CORS(app)  # Permite que o React (porta diferente) acesse este servidor
+CORS(app)
 
-# --- CONFIGURAÇÕES DO EMAIL ---
-# PREENCHA AQUI COM SUA SENHA DE APLICATIVO (NÃO USE A SENHA DO LOGIN NORMAL)
-# Para Outlook/Hotmail, você geralmente precisa gerar uma senha de app se tiver 2FA.
+# Configurações via Variáveis de Ambiente (Segurança)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_ADDRESS = "aicodersa@gmail.com"
-EMAIL_PASSWORD = "uola adcg bkiu ibkl" 
+EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
 
 def load_template(nome, email, assunto, mensagem):
-    # Caminho absoluto para o diretório deste script
+    # Caminho absoluto para evitar erros de arquivo não encontrado
     base_dir = os.path.dirname(os.path.abspath(__file__))
     template_path = os.path.join(base_dir, 'templates', 'email_template.html')
     
-    # Carrega o HTML e substitui os placeholders
     with open(template_path, 'r', encoding='utf-8') as file:
         template = file.read()
     
+    # Usando .format() com segurança (o template HTML deve ter chaves duplicadas para CSS)
     return template.format(
         nome=nome,
         email=email,
@@ -34,30 +33,26 @@ def load_template(nome, email, assunto, mensagem):
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
+    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+        return jsonify({"success": False, "message": "Configuração de servidor incompleta."}), 500
+
     data = request.json
-    
     nome = data.get('nome')
     email_cliente = data.get('email')
     assunto = data.get('assunto')
     mensagem_texto = data.get('mensagem')
 
     try:
-        # Configurar mensagem
         msg = MIMEMultipart()
         msg['From'] = EMAIL_ADDRESS
-        msg['To'] = "Codersa.ai@outlook.com" # Envia para o seu email principal
+        msg['To'] = DESTINATION_EMAIL
         msg['Subject'] = f"Novo Contato: {assunto}"
 
-        # Corpo do email (HTML)
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
         msg.attach(MIMEText(html_content, 'html'))
 
-        # Conexão com Servidor SMTP
-        # Tenta conectar de forma segura (STARTTLS)
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.ehlo() # Identifica-se para o servidor
-        server.starttls() # Inicia criptografia
-        server.ehlo() # Re-identifica como criptografado
+        server.starttls()
         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         server.send_message(msg)
         server.quit()
@@ -69,4 +64,4 @@ def send_email():
         return jsonify({"success": False, "message": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=10000)
