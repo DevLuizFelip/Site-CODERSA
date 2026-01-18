@@ -27,7 +27,7 @@ CORS(
 # Configurações via Resend (Variáveis de Ambiente)
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
 RESEND_FROM = os.environ.get("RESEND_FROM", "Codersa <onboarding@resend.dev>")
-DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
+DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "luicostasantana@outlook.com")
 RESEND_API_URL = os.environ.get("RESEND_API_URL", "https://api.resend.com/emails")
 
 def load_template(nome, email, assunto, mensagem):
@@ -84,10 +84,12 @@ def send_email():
         )
 
         if response.status_code >= 400:
+            # Log detalhado para diagnóstico no Render
             try:
                 error_payload = response.json()
             except Exception:
                 error_payload = {"raw": response.text}
+            print(f"Resend erro {response.status_code}: {error_payload}")
             return jsonify({"success": False, "message": error_payload}), 500
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
