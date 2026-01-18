@@ -125,10 +125,10 @@ const ContactPage = () => {
                   <span className="w-2 h-2 rounded-full bg-green-500"></span>
                   <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Especialistas Ativos</span>
                 </div>
-                <div className="flex gap-4 text-gray-400">
-                  <a href="#" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
-                  <a href="#" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
-                </div>
+              <div className="flex gap-4 text-gray-400">
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+              </div>
               </div>
             </div>
           </aside>
@@ -215,10 +215,6 @@ const ContactPage = () => {
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500"></span>
                 <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Especialistas Ativos</span>
-              </div>
-              <div className="flex gap-4 text-gray-400">
-                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
-                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
               </div>
               <div className="flex gap-4 text-gray-400">
                 <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
