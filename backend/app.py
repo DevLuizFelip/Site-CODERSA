@@ -1,9 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from mailersend import MailerSendClient, EmailBuilder
 
 app = Flask(__name__)
 # CORS explícito para o domínio de produção + localhost
@@ -29,7 +27,8 @@ MAILERSEND_API_KEY = os.environ.get("MAILERSEND_API_KEY")
 MAILERSEND_FROM_EMAIL = os.environ.get("MAILERSEND_FROM_EMAIL")
 MAILERSEND_FROM_NAME = os.environ.get("MAILERSEND_FROM_NAME", "Codersa")
 DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "luicostasantana@outlook.com")
-MAILERSEND_API_URL = os.environ.get("MAILERSEND_API_URL", "https://api.mailersend.com/v1/email")
+
+ms = MailerSendClient(MAILERSEND_API_KEY) if MAILERSEND_API_KEY else None
 
 def load_template(nome, email, assunto, mensagem):
     # Caminho absoluto para evitar erros de arquivo não encontrado
@@ -51,6 +50,8 @@ def load_template(nome, email, assunto, mensagem):
 def send_email():
     if not MAILERSEND_API_KEY or not MAILERSEND_FROM_EMAIL:
         return jsonify({"success": False, "message": "MAILERSEND_API_KEY/MAILERSEND_FROM_EMAIL não configuradas."}), 500
+    if ms is None:
+        return jsonify({"success": False, "message": "MailerSendClient não inicializado."}), 500
 
     data = request.json
     nome = data.get('nome')
@@ -62,44 +63,21 @@ def send_email():
 
     try:
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
-        payload = {
-            "from": {
-                "email": MAILERSEND_FROM_EMAIL,
-                "name": MAILERSEND_FROM_NAME,
-            },
-            "to": [{"email": DESTINATION_EMAIL, "name": "Codersa"}],
-            "subject": f"Novo Contato: {assunto}",
-            "html": html_content,
-            "reply_to": {"email": email_cliente},
-        }
 
-        session = requests.Session()
-        retries = Retry(total=2, backoff_factor=0.5, status_forcelist=[429, 500, 502, 503, 504])
-        session.mount("https://", HTTPAdapter(max_retries=retries))
+        email = (EmailBuilder()
+                 .from_email(MAILERSEND_FROM_EMAIL, MAILERSEND_FROM_NAME)
+                 .to_many([{"email": DESTINATION_EMAIL, "name": "Codersa"}])
+                 .subject(f"Novo Contato: {assunto}")
+                 .html(html_content)
+                 .reply_to(email_cliente)
+                 .build())
 
-        response = session.post(
-            MAILERSEND_API_URL,
-            headers={
-                "Authorization": f"Bearer {MAILERSEND_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json=payload,
-            timeout=(5, 40),
-        )
+        response = ms.emails.send(email)
 
-        if response.status_code >= 400:
-            # Log detalhado para diagnóstico no Render
-            try:
-                error_payload = response.json()
-            except Exception:
-                error_payload = {"raw": response.text}
-            print(f"MailerSend erro {response.status_code}: {error_payload}")
-            return jsonify({"success": False, "message": error_payload}), 500
-
-        return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
+        return jsonify({"success": True, "message": "Email enviado com sucesso!", "id": getattr(response, "message_id", None)}), 200
 
     except Exception as e:
-        print(f"Erro ao enviar email: {e}")
+        print(f"Erro ao enviar email (MailerSend SDK): {e}")
         return jsonify({"success": False, "message": str(e)}), 500
 
 if __name__ == '__main__':
