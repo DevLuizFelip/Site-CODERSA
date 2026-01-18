@@ -8,11 +8,12 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Configurações (Em produção, idealmente usam Variáveis de Ambiente)
+# Configurações (use Variáveis de Ambiente; não commitar credenciais)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS", "aicodersa@gmail.com")
-EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "uola adcg bkiu ibkl")
+EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
 
 def load_template(nome, email, assunto, mensagem):
     # Caminho ajustado para Vercel (arquivo deve estar junto na pasta api ou configurado corretamente)
@@ -84,6 +85,8 @@ def load_template(nome, email, assunto, mensagem):
 
 @app.route('/api/send-email', methods=['POST'])
 def send_email():
+    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+        return jsonify({"success": False, "message": "EMAIL_ADDRESS/EMAIL_PASSWORD não configurados."}), 500
     data = request.json
     
     nome = data.get('nome')
@@ -94,7 +97,7 @@ def send_email():
     try:
         msg = MIMEMultipart()
         msg['From'] = EMAIL_ADDRESS
-        msg['To'] = "Codersa.ai@outlook.com"
+        msg['To'] = DESTINATION_EMAIL
         msg['Subject'] = f"Novo Contato: {assunto}"
 
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
