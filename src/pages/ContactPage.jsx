@@ -18,8 +18,8 @@ const ContactPage = () => {
     };
 
     try {
-      // Envia para o backend Python (ajuste a URL se necessário)
-      const response = await fetch('http://localhost:5000/send-email', {
+      // Produção (Render). Em dev local, você pode manter um backend local e trocar aqui se precisar.
+      const response = await fetch('https://codersa-backend.onrender.com/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
