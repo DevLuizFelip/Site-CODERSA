@@ -5,6 +5,7 @@ import { BsTerminal } from 'react-icons/bs'; // Ícone similar ao da imagem
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,13 +48,34 @@ const Header = () => {
         </nav>
 
         {/* MENU MOBILE (Simples para agora) */}
-        <button className="md:hidden text-primary">
+        <button className="md:hidden text-primary" onClick={() => setMenuOpen(prev => !prev)}>
             <span className="sr-only">Menu</span>
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
       </div>
+      {menuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+          <nav className="flex flex-col gap-4 px-6 py-6">
+            {['Serviços', 'Processo', 'Sobre', 'Contato'].map((item) => (
+              <NavLink
+                key={item}
+                to={`/${item.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")}`}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `text-xs font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                    isActive ? 'text-primary' : 'text-gray-500 hover:text-primary'
+                  }`
+                }
+              >
+                {item}
+              </NavLink>
+            ))}
+            <ThemeToggleButton />
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

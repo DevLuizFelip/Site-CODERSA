@@ -74,8 +74,8 @@ const ServicesSection = () => {
 
         </div>
 
-        {/* === BARRA LATERAL (Direita - Desktop) === */}
-        <aside className="hidden lg:block w-80 xl:w-96 shrink-0 sticky top-32">
+        {/* === BARRA LATERAL (Direita) === */}
+        <aside className="w-full lg:w-80 xl:w-96 shrink-0 mt-12 lg:mt-0 lg:sticky lg:top-32">
           <div className="bg-surface border border-gray-100 dark:border-gray-800 p-8 shadow-2xl shadow-gray-100/50 dark:shadow-none relative overflow-hidden">
             
             {/* Cabeçalho Sidebar */}
@@ -126,8 +126,8 @@ const ServicesSection = () => {
                 <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Time Online</span>
               </div>
               <div className="flex gap-4 text-gray-400">
-                <a href="#" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
-                <a href="#" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
+                <a href="tel:+5511936193760" className="hover:text-primary transition-colors"><BsGlobe className="text-lg" /></a>
+                <a href="mailto:codersa.ai@outlook.com" className="hover:text-primary transition-colors"><BsEnvelope className="text-lg" /></a>
               </div>
             </div>
 
