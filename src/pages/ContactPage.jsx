@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom';
 
 const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showWhatsAppLink, setShowWhatsAppLink] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     
     // Coleta os dados do formulário
     const formData = new FormData(e.target);
@@ -35,7 +39,11 @@ const ContactPage = () => {
         );
         // Redireciona para o WhatsApp após enviar com sucesso
         setTimeout(() => {
-          window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank', 'noopener,noreferrer');
+          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+          const popup = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+          if (!popup) {
+            setShowWhatsAppLink(true);
+          }
         }, 800);
       } else {
         alert('Erro ao enviar email. Tente novamente.');
@@ -43,6 +51,8 @@ const ContactPage = () => {
     } catch (error) {
       console.error('Erro:', error);
       alert('Erro de conexão com o servidor.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -69,17 +79,29 @@ const ContactPage = () => {
               Nossa equipe de especialistas entrará em contato em breve para discutir como podemos elevar o patamar tecnológico do seu projeto.
             </p>
             
-            <Link 
-              to="/" 
-              className="inline-flex items-center gap-4 bg-black text-white dark:bg-white dark:text-black h-14 px-10 font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-gray-200/50 dark:shadow-none"
-            >
-              Voltar para o Início
-              <BsArrowRight className="text-lg" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Link 
+                to="/" 
+                className="inline-flex items-center gap-4 bg-black text-white dark:bg-white dark:text-black h-14 px-10 font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-gray-200/50 dark:shadow-none"
+              >
+                Voltar para o Início
+                <BsArrowRight className="text-lg" />
+              </Link>
+              {showWhatsAppLink && (
+                <a
+                  href="https://wa.me/5511936193760?text=Ol%C3%A1!%20Acabei%20de%20enviar%20o%20formul%C3%A1rio%20e%20gostaria%20de%20falar%20sobre%20minha%20solicita%C3%A7%C3%A3o."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 h-14 px-8 border border-gray-300 dark:border-gray-700 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-80"
+                >
+                  Abrir WhatsApp
+                </a>
+              )}
+            </div>
           </div>
 
           {/* === SIDEBAR (Direita) - Com mensagem de Acompanhamento === */}
-          <aside className="w-full lg:w-80 xl:w-96 shrink-0 lg:sticky lg:top-32">
+          <aside className="w-full lg:w-80 xl:w-96 shrink-0 mt-10 lg:mt-0 lg:sticky lg:top-32">
             <div className="bg-surface border border-gray-100 dark:border-gray-800 p-8 shadow-2xl shadow-gray-100/50 dark:shadow-none relative overflow-hidden">
               <div className="border-b border-gray-100 dark:border-gray-800 pb-6 mb-8">
                 <h4 className="font-serif text-xl italic text-primary">Canais de Suporte</h4>
@@ -171,10 +193,15 @@ const ContactPage = () => {
 
             <div className="pt-8">
               <button 
-                type="submit" 
-                className="inline-flex items-center gap-4 bg-black text-white dark:bg-white dark:text-black h-14 px-10 font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-gray-200/50 dark:shadow-none"
+                type="submit"
+                disabled={isSubmitting}
+                className={`inline-flex items-center gap-4 h-14 px-10 font-bold uppercase tracking-[0.2em] transition-all shadow-xl shadow-gray-200/50 dark:shadow-none ${
+                  isSubmitting
+                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                    : 'bg-black text-white dark:bg-white dark:text-black hover:opacity-90'
+                }`}
               >
-                Enviar Solicitação
+                {isSubmitting ? 'Enviando...' : 'Enviar Solicitação'}
                 <BsArrowRight className="text-lg" />
               </button>
             </div>
@@ -182,7 +209,7 @@ const ContactPage = () => {
         </div>
 
         {/* === SIDEBAR (Direita) - Padrão === */}
-        <aside className="w-full lg:w-80 xl:w-96 shrink-0 lg:sticky lg:top-32">
+        <aside className="w-full lg:w-80 xl:w-96 shrink-0 mt-10 lg:mt-0 lg:sticky lg:top-32">
           <div className="bg-surface border border-gray-100 dark:border-gray-800 p-8 shadow-2xl shadow-gray-100/50 dark:shadow-none relative overflow-hidden">
             <div className="border-b border-gray-100 dark:border-gray-800 pb-6 mb-8">
               <h4 className="font-serif text-xl italic text-primary">Canais de Suporte</h4>
