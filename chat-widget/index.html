@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget Cody AI - Demo</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/chat-widget.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1>🤖 Demo Widget Cody AI</h1>
+            <p>Este é um ambiente de demonstração para o widget flutuante da Codersa.</p>
+            <p>Clique no ícone no canto inferior direito para interagir.</p>
+            <div style="margin-top: 20px; padding: 15px; background: #eef2ff; border-radius: 10px; text-align: left;">
+                <strong>Teste perguntando sobre:</strong>
+                <ul style="margin: 10px 0 0 20px; color: #555;">
+                    <li>"Quanto custa a automação?"</li>
+                    <li>"Como funciona a integração WhatsApp?"</li>
+                    <li>"Quero agendar uma reunião"</li>
+                    <li>"Vocês usam IA?"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIDGET HTML START -->
+    <div id="chat-widget">
+        <!-- Painel de Chat -->
+        <div id="chat-panel" class="chat-panel hidden">
+            <div class="chat-header">
+                <div class="chat-avatar-header gradient-avatar"></div>
+                <div class="chat-header-info">
+                    <h3>Cody AI</h3>
+                    <p>Online agora • IA Powered</p>
+                </div>
+                <button id="chat-close" aria-label="Fechar chat">&times;</button>
+            </div>
+            
+            <div id="chat-messages" class="chat-messages">
+                <!-- As mensagens serão inseridas aqui via JS -->
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Digite sua dúvida..." aria-label="Digite sua mensagem">
+                <button id="chat-send" aria-label="Enviar mensagem">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante -->
+        <button id="chat-toggle" class="chat-button" aria-label="Abrir chat">
+        </button>
+    </div>
+    <!-- WIDGET HTML END -->
+
+    <!-- Scripts -->
+    <script src="js/chat-widget.js"></script>
+
+</body>
+</html>

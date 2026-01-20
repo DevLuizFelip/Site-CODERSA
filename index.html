@@ -10,10 +10,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
     
+    <!-- Cody AI Widget CSS -->
+    <link rel="stylesheet" href="/css/chat-widget.css">
+
     <title>Codersa | Engenharia de Software</title>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Cody AI Widget HTML -->
+    <div id="chat-widget">
+        <!-- Painel de Chat -->
+        <div id="chat-panel" class="chat-panel hidden">
+            <div class="chat-header">
+                <div class="chat-avatar-header gradient-avatar"></div>
+                <div class="chat-header-info">
+                    <h3>Cody AI</h3>
+                    <p>Online agora • IA Powered</p>
+                </div>
+                <button id="chat-close" aria-label="Fechar chat">&times;</button>
+            </div>
+            
+            <div id="chat-messages" class="chat-messages">
+                <!-- As mensagens serão inseridas aqui via JS -->
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Digite sua dúvida..." aria-label="Digite sua mensagem">
+                <button id="chat-send" aria-label="Enviar mensagem">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante -->
+        <button id="chat-toggle" class="chat-button" aria-label="Abrir chat">
+        </button>
+    </div>
+
+    <!-- Cody AI Widget Script -->
+    <script src="/js/chat-widget.js"></script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
