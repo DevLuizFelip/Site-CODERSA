@@ -16,7 +16,7 @@ const HeroSection = () => {
 
         {/* Subtítulo Espaçado */}
         <p className="font-sans text-xs md:text-sm lg:text-base text-gray-400 uppercase tracking-[0.25em] mb-12 font-medium">
-          Engenharia de Software com Precisão Estética.
+          Engenharia de Software Potencializada por IA.
         </p>
 
         {/* Botão Principal Minimalista */}
