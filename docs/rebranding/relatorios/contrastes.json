@@ -1,0 +1,68 @@
+[
+  {
+    "name": "text light",
+    "fg": "#15181E",
+    "bg": "#F7F7F2",
+    "ratio": 16.54
+  },
+  {
+    "name": "muted light",
+    "fg": "#535C68",
+    "bg": "#F7F7F2",
+    "ratio": 6.31
+  },
+  {
+    "name": "button light",
+    "fg": "#FFFFFF",
+    "bg": "#3157FF",
+    "ratio": 5.33
+  },
+  {
+    "name": "text dark",
+    "fg": "#F7F7F2",
+    "bg": "#15181E",
+    "ratio": 16.54
+  },
+  {
+    "name": "muted dark",
+    "fg": "#AAB5C5",
+    "bg": "#15181E",
+    "ratio": 8.57
+  },
+  {
+    "name": "action dark",
+    "fg": "#8CA1FF",
+    "bg": "#15181E",
+    "ratio": 7.33
+  },
+  {
+    "name": "button dark",
+    "fg": "#15181E",
+    "bg": "#8CA1FF",
+    "ratio": 7.33
+  },
+  {
+    "name": "success light",
+    "fg": "#18633C",
+    "bg": "#F7F7F2",
+    "ratio": 6.76
+  },
+  {
+    "name": "error light",
+    "fg": "#A32727",
+    "bg": "#F7F7F2",
+    "ratio": 6.79
+  },
+  {
+    "name": "control border light",
+    "fg": "#747D88",
+    "bg": "#F7F7F2",
+    "ratio": 3.88
+  },
+  {
+    "name": "control border dark",
+    "fg": "#8591A3",
+    "bg": "#15181E",
+    "ratio": 5.57
+  }
+]

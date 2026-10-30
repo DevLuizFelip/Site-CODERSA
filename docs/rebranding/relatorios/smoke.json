@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "kit",
+    "brokenImages": []
+  },
+  {
+    "path": "/",
+    "theme": "light",
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "h1": "Sua operação\nconectada.\nSeu time focado\nno que importa.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/servicos",
+    "theme": "light",
+    "title": "Soluções em software e automação | CODERSA",
+    "h1": "Tecnologia que entende\no seu trabalho.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/processo",
+    "theme": "light",
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "h1": "Um processo claro.\nDa conversa à entrega.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/portfolio",
+    "theme": "light",
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "h1": "Veja o trabalho\nganhar forma.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/sobre",
+    "theme": "light",
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "h1": "Inteligência aplicada\nao trabalho real.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/contato",
+    "theme": "light",
+    "title": "Mapear meu processo | Contato CODERSA",
+    "h1": "Vamos entender\no seu processo.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/",
+    "theme": "dark",
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "h1": "Sua operação\nconectada.\nSeu time focado\nno que importa.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/servicos",
+    "theme": "dark",
+    "title": "Soluções em software e automação | CODERSA",
+    "h1": "Tecnologia que entende\no seu trabalho.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/processo",
+    "theme": "dark",
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "h1": "Um processo claro.\nDa conversa à entrega.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/portfolio",
+    "theme": "dark",
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "h1": "Veja o trabalho\nganhar forma.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/sobre",
+    "theme": "dark",
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "h1": "Inteligência aplicada\nao trabalho real.",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "path": "/contato",
+    "theme": "dark",
+    "title": "Mapear meu processo | Contato CODERSA",
+    "h1": "Vamos entender\no seu processo.",
+    "overflow": false,
+    "errors": []
+  }
+]

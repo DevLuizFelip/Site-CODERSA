@@ -1,0 +1,25 @@
+﻿
+> codersa@0.0.0 test
+> node --test tests/*.test.mjs
+
+✔ required fields and invalid email return named errors (2.559ms)
+✔ success requires service confirmation and preserves the four-field contract (0.4297ms)
+✔ HTTP error is not a conversion (0.4368ms)
+✔ negative body is not a conversion (0.2548ms)
+✔ missing confirmation is not a conversion (0.1491ms)
+✔ non-boolean confirmation is not a conversion (0.1552ms)
+✔ malformed JSON is not a conversion (0.1765ms)
+✔ network failure has no service details in its message (0.1867ms)
+✔ timeout aborts the request and returns a retryable category (13.4066ms)
+✔ analytics allowlist drops PII, arbitrary routes and unknown events (0.5372ms)
+✔ six institutional pages have route-specific initial HTML and metadata (6.9023ms)
+✔ private routes use an empty noindex shell and are absent from sitemap (2.6489ms)
+✔ hosting keeps Python API precedence and explicit public destinations (1.8839ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 111.9564

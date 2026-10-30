@@ -45,7 +45,7 @@ const LoginPage = () => {
       setLoading(true);
       setError(null);
       
-      const { data, error } = await supabase.auth.mfa.challengeAndVerify({
+      const { error } = await supabase.auth.mfa.challengeAndVerify({
           factorId: (await supabase.auth.mfa.listFactors()).data.totp[0].id,
           code: mfaCode
       });
@@ -60,29 +60,32 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '5rem auto', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
+    <main className="login-panel">
       {!mfaRequired ? (
         <>
-          <h2>Login da Dashboard</h2>
+          <h1>Login da Dashboard</h1>
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input type="email" placeholder="Seu email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Sua senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <label htmlFor="login-email">E-mail</label>
+            <input id="login-email" type="email" autoComplete="username" placeholder="Seu email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <label htmlFor="login-password">Senha</label>
+            <input id="login-password" type="password" autoComplete="current-password" placeholder="Sua senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <button type="submit" disabled={loading}>{loading ? 'Entrando...' : 'Entrar'}</button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
           </form>
         </>
       ) : (
         <>
-          <h2>Verificação de Dois Fatores</h2>
+          <h1>Verificação de Dois Fatores</h1>
            <form onSubmit={handleMfaSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <p>Digite o código do seu aplicativo autenticador.</p>
-            <input type="text" placeholder="Código de 6 dígitos" value={mfaCode} onChange={(e) => setMfaCode(e.target.value)} required />
+            <label htmlFor="mfa-code">Código de verificação</label>
+            <input id="mfa-code" type="text" autoComplete="one-time-code" inputMode="numeric" placeholder="Código de 6 dígitos" value={mfaCode} onChange={(e) => setMfaCode(e.target.value)} required />
             <button type="submit" disabled={loading}>{loading ? 'Verificando...' : 'Verificar'}</button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
           </form>
         </>
       )}
-    </div>
+    </main>
   );
 };
 

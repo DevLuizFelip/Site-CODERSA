@@ -1,0 +1,14 @@
+{
+  "cssSource": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400&display=swap",
+  "fontSources": [
+    "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggmxSuXd.woff2",
+    "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2",
+    "https://fonts.gstatic.com/s/sourceserif4/v15/vEF02_tTDB4M7-auWDN0ahZJW1ge6NmXpVAHV83Bfb_US2D2QYxoUKIkn98pRl9tAsQCnjU.woff2",
+    "https://fonts.gstatic.com/s/sourceserif4/v15/vEF02_tTDB4M7-auWDN0ahZJW1ge6NmXpVAHV83Bfb_US2D2QYxoUKIkn98pRl9tDMQC.woff2"
+  ],
+  "licenses": [
+    "https://github.com/google/fonts/tree/main/ofl/manrope",
+    "https://github.com/google/fonts/tree/main/ofl/sourceserif4"
+  ],
+  "referenceDate": "2026-10-29"
+}

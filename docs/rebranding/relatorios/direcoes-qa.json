@@ -1,0 +1,203 @@
+{
+  "browser": "156.0.8078.49",
+  "results": [
+    {
+      "direction": "terminal",
+      "width": 320,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "terminal",
+      "width": 320,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "terminal",
+      "width": 375,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "terminal",
+      "width": 375,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "terminal",
+      "width": 768,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "terminal",
+      "width": 768,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "terminal",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "terminal",
+      "width": 1440,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "modular",
+      "width": 320,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "modular",
+      "width": 320,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "modular",
+      "width": 375,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "modular",
+      "width": 375,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "modular",
+      "width": 768,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "modular",
+      "width": 768,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "modular",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "modular",
+      "width": 1440,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "flow",
+      "width": 320,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "flow",
+      "width": 320,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "flow",
+      "width": 375,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "flow",
+      "width": 375,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "flow",
+      "width": 768,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "flow",
+      "width": 768,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "direction": "flow",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "invalidLinks": [],
+      "offerOpens": true,
+      "errors": []
+    },
+    {
+      "direction": "flow",
+      "width": 1440,
+      "mode": "brand",
+      "overflow": false,
+      "slides": 3
+    },
+    {
+      "mode": "review",
+      "directionSwitches": true,
+      "mobileWidth": 375
+    }
+  ],
+  "passed": true
+}

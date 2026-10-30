@@ -1,6 +1,15 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/servicos", "destination": "/servicos/index.html" },
+    { "source": "/processo", "destination": "/processo/index.html" },
+    { "source": "/portfolio", "destination": "/portfolio/index.html" },
+    { "source": "/sobre", "destination": "/sobre/index.html" },
+    { "source": "/contato", "destination": "/contato/index.html" },
+    { "source": "/login", "destination": "/spa.html" },
+    { "source": "/avaliar", "destination": "/spa.html" },
+    { "source": "/admin/:path*", "destination": "/spa.html" },
+    { "source": "/((?!assets/|brand/|theme-init\\.js|robots\\.txt|sitemap\\.xml).*)", "destination": "/spa.html" }
   ]
 }

@@ -1,0 +1,71 @@
+﻿
+> codersa@0.0.0 build
+> vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs
+
+vite v7.3.1 building client environment for production...
+transforming...
+node.exe : Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+No linha:1 caractere:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Browserslist: b...ld. Please run::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 130 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             0.85 kB │ gzip:  0.45 kB
+dist/assets/DashboardLayout-B1rduRs3.css    9.59 kB │ gzip:  2.21 kB
+dist/assets/index-S7gKrqOf.css             45.54 kB │ gzip:  9.25 kB
+dist/assets/ProtectedRoute-CiycRxWG.js      0.32 kB │ gzip:  0.26 kB
+dist/assets/Modal-DI9ayLaN.js               0.40 kB │ gzip:  0.24 kB
+dist/assets/AuthLayout-DfzYQUmb.js          0.45 kB │ gzip:  0.32 kB
+dist/assets/AuthContext-DZj2Q_9x.js         0.57 kB │ gzip:  0.38 kB
+dist/assets/SecurityPage-tG4nLtLp.js        1.29 kB │ gzip:  0.70 kB
+dist/assets/DashboardHome-DKvbCzIj.js       1.36 kB │ gzip:  0.68 kB
+dist/assets/DashboardLayout-Be-d1viu.js     1.40 kB │ gzip:  0.74 kB
+dist/assets/LoginPage-chB9CS-1.js           2.21 kB │ gzip:  0.96 kB
+dist/assets/LeaveReviewPage-BP-xY-G9.js     2.27 kB │ gzip:  1.13 kB
+dist/assets/ContactsPage-BstO07Qd.js        4.81 kB │ gzip:  1.89 kB
+dist/assets/TestimonialsPage-DS6aA2ZJ.js    6.87 kB │ gzip:  2.80 kB
+dist/assets/ProjectsPage-DsFyYX2n.js       46.57 kB │ gzip: 15.56 kB
+dist/assets/supabaseClient-DsqjY0_H.js    170.34 kB │ gzip: 44.55 kB
+dist/assets/index-BuSgPhCn.js             275.25 kB │ gzip: 88.60 kB
+✓ built in 2.13s
+vite v7.3.1 building ssr environment for production...
+transforming...
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+"default" is imported from external module "react" but never used in "src/dashboard/pages/SecurityPage.jsx", 
+"src/pages/LoginPage.jsx", "src/auth/AuthContext.jsx", "src/auth/ProtectedRoute.jsx", "src/pages/MaintenancePage.jsx", 
+"src/dashboard/components/StatCard.jsx", "src/dashboard/pages/DashboardHome.jsx", 
+"src/dashboard/components/Sidebar.jsx", "src/dashboard/data/DashboardLayout.jsx", 
+"src/dashboard/components/Modal.jsx", "src/dashboard/pages/TestimonialsPage.jsx", 
+"src/dashboard/components/ProjectForm.jsx", "src/dashboard/pages/ProjectsPage.jsx", 
+"src/dashboard/components/Pagination.jsx" and "src/dashboard/pages/ContactsPage.jsx".
+✓ 42 modules transformed.
+rendering chunks...
+dist-ssr/assets/supabaseClient-BN6UzBOI.js     0.44 kB
+dist-ssr/assets/ProtectedRoute-BaUFnvak.js     0.60 kB
+dist-ssr/assets/Modal-DbuNRxn2.js              0.67 kB
+dist-ssr/assets/AuthLayout-DdE65CVS.js         0.73 kB
+dist-ssr/assets/AuthContext-Bbz9sS8B.js        1.07 kB
+dist-ssr/assets/DashboardLayout-DCB8zAci.js    2.24 kB
+dist-ssr/assets/SecurityPage-CCeBTCW6.js       2.24 kB
+dist-ssr/assets/DashboardHome-B50pdneg.js      2.60 kB
+dist-ssr/assets/LoginPage-DgZCEXvG.js          3.73 kB
+dist-ssr/assets/LeaveReviewPage-BJyiYAty.js    3.74 kB
+dist-ssr/assets/TestimonialsPage-Cki5Gj0-.js   7.26 kB
+dist-ssr/assets/ContactsPage-DiXUkjkp.js       9.52 kB
+dist-ssr/assets/ProjectsPage-auXeDzHp.js      16.27 kB
+dist-ssr/entry-server.js                      48.63 kB
+✓ built in 726ms
+Rendered /
+Rendered /servicos
+Rendered /processo
+Rendered /portfolio
+Rendered /sobre
+Rendered /contato

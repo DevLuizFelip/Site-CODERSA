@@ -1,12 +1,2 @@
-import React from 'react';
-import ServicesSection from '../components/ServicesSection';
-
-const ServicesPage = () => {
-  return (
-    <div className="pt-20"> {/* Padding top para compensar o header fixo se necessário */}
-      <ServicesSection />
-    </div>
-  );
-};
-
-export default ServicesPage;
+import { PageIntro, Offers, FAQ, ContactSection } from '../site/Sections';
+export default function ServicesPage() { return <><PageIntro eyebrow="SOLUÇÕES" title="Tecnologia que entende" accent="o seu trabalho.">Software, automação e IA aplicada a processos reais. O ponto de partida é a necessidade da operação.</PageIntro><Offers detailed/><FAQ/><ContactSection/></>; }

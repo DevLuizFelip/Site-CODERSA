@@ -1,12 +1,2 @@
-import React from 'react';
-import HeroSection from '../components/HeroSection';
-
-const HomePage = () => {
-  return (
-    <>
-      <HeroSection />
-    </>
-  );
-};
-
-export default HomePage;
+import { Hero, Problem, Offers, Demonstration, Method, People, FAQ, ContactSection } from '../site/Sections';
+export default function HomePage() { return <><Hero/><Problem/><Offers/><Demonstration/><Method/><People/><FAQ/><ContactSection/></>; }

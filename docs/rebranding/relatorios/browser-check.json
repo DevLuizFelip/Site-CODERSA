@@ -1,0 +1,251 @@
+{
+  "browser": "156.0.8078.49",
+  "results": [
+    {
+      "name": "layout light 320 /",
+      "passed": true
+    },
+    {
+      "name": "layout light 320 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout light 320 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout light 320 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout light 320 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout light 320 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout light 375 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout light 768 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout light 1440 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout dark 320 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout dark 375 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout dark 768 /contato",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /servicos",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /processo",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /portfolio",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /sobre",
+      "passed": true
+    },
+    {
+      "name": "layout dark 1440 /contato",
+      "passed": true
+    },
+    {
+      "name": "navigation, keyboard, disclosure, theme persistence and reduced motion",
+      "passed": true
+    },
+    {
+      "name": "200% text zoom and accessibility-tree reading sample",
+      "passed": true
+    },
+    {
+      "name": "contact required fields, single send, positive confirmation and voluntary WhatsApp",
+      "passed": true
+    },
+    {
+      "name": "contact http retains fields and permits retry",
+      "passed": true
+    },
+    {
+      "name": "contact negative retains fields and permits retry",
+      "passed": true
+    },
+    {
+      "name": "contact network retains fields and permits retry",
+      "passed": true
+    },
+    {
+      "name": "contact timeout retains fields and permits retry",
+      "passed": true
+    },
+    {
+      "name": "portfolio empty, failure, retry and public records only",
+      "passed": true
+    },
+    {
+      "name": "maintenance and settings timeout preserve documented behavior",
+      "passed": true
+    },
+    {
+      "name": "review form keeps moderation and accessible star input",
+      "passed": true
+    },
+    {
+      "name": "login and admin regression light",
+      "passed": true
+    },
+    {
+      "name": "login and admin regression dark",
+      "passed": true
+    },
+    {
+      "name": "initial HTML works without scripts and API does not return SPA HTML",
+      "passed": true
+    }
+  ],
+  "issues": [],
+  "passed": true
+}

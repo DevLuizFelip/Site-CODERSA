@@ -1,119 +1,24 @@
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '../supabaseClient';
-import toast from 'react-hot-toast';
-import { FaStar } from 'react-icons/fa';
-
-// Componente para a seleção de estrelas
-const StarRatingInput = ({ rating, setRating }) => {
-    const [hover, setHover] = useState(null);
-    return (
-        <div style={{ display: 'flex', gap: '0.25rem' }}>
-            {[...Array(5)].map((star, index) => {
-                const ratingValue = index + 1;
-                return (
-                    <label key={index}>
-                        <input
-                            type="radio"
-                            name="rating"
-                            value={ratingValue}
-                            onClick={() => setRating(ratingValue)}
-                            style={{ display: 'none' }}
-                        />
-                        <FaStar
-                            color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-                            size={30}
-                            onMouseEnter={() => setHover(ratingValue)}
-                            onMouseLeave={() => setHover(null)}
-                            style={{ cursor: 'pointer' }}
-                        />
-                    </label>
-                );
-            })}
-        </div>
-    );
-};
-
-const LeaveReviewPage = () => {
-    const [formData, setFormData] = useState({ client_name: '', company_position: '', quote: '' });
-    const [rating, setRating] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-
-    // Definido apenas uma vez
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (rating === 0) {
-            toast.error("Por favor, selecione uma nota de 1 a 5 estrelas.");
-            return;
-        }
-        setLoading(true);
-
-        const { error } = await supabase.from('testimonials').insert([
-            {
-                client_name: formData.client_name,
-                company_position: formData.company_position,
-                quote: formData.quote,
-                rating: rating,
-                is_approved: false
-            }
-        ]);
-        
-        setLoading(false);
-
-        if (error) {
-            toast.error('Erro ao enviar sua avaliação.');
-        } else {
-            setSubmitted(true);
-        }
-    };
-
-    if (submitted) {
-        return (
-            <section className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
-                <div className="section-header">
-                    <h1>Obrigado!</h1>
-                    <p>Sua avaliação foi enviada com sucesso e será analisada pela nossa equipe.</p>
-                </div>
-            </section>
-        );
-    }
-
-    return (
-        <section className="container">
-            <div className="section-header">
-                <h1>Deixe sua Avaliação</h1>
-                <p>Ficamos felizes em ter você como cliente! Por favor, compartilhe sua experiência conosco.</p>
-            </div>
-            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-                <form className="contact-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Sua nota</label>
-                        <StarRatingInput rating={rating} setRating={setRating} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="client_name">Seu Nome</label>
-                        <input type="text" id="client_name" name="client_name" className="form-control" value={formData.client_name} onChange={handleChange} required disabled={loading} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="company_position">Seu Cargo e Empresa (Ex: CEO da Empresa X)</label>
-                        <input type="text" id="company_position" name="company_position" className="form-control" value={formData.company_position} onChange={handleChange} required disabled={loading} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="quote">Sua Avaliação</label>
-                        <textarea id="quote" name="quote" rows="6" className="form-control" value={formData.quote} onChange={handleChange} required placeholder="Descreva como foi sua experiência trabalhando conosco..." disabled={loading}></textarea>
-                    </div>
-                    <button type="submit" className="submit-button" disabled={loading}>
-                        {loading ? 'Enviando...' : 'Enviar Avaliação'}
-                    </button>
-                </form>
-            </div>
-        </section>
-    );
-};
-
-export default LeaveReviewPage;
+import { PageIntro } from '../site/Sections';
+export default function LeaveReviewPage() {
+  const [values, setValues] = useState({ client_name: '', company_position: '', quote: '' });
+  const [rating, setRating] = useState('');
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
+  const busy = useRef(false);
+  const heading = useRef(null);
+  useEffect(() => { if (status === 'success') heading.current?.focus(); }, [status]);
+  async function submit(event) {
+    event.preventDefault();
+    if (busy.current) return;
+    busy.current = true; setStatus('sending'); setError('');
+    try {
+      const { error: issue } = await supabase.from('testimonials').insert([{ ...values, rating: Number(rating), is_approved: false }]);
+      if (issue) throw issue;
+      setStatus('success');
+    } catch { setError('Não foi possível enviar sua avaliação. Seus dados foram mantidos para tentar novamente.'); setStatus('error'); }
+    finally { busy.current = false; }
+  }
+  return <><PageIntro eyebrow="SUA EXPERIÊNCIA" title="Conte como foi" accent="trabalhar com a CODERSA.">Sua avaliação será analisada antes de ser publicada.</PageIntro><section className="section-pad">{status === 'success' ? <div className="form-message success-message"><h2 ref={heading} tabIndex="-1">Obrigado pela avaliação.</h2><p>Ela foi enviada e será analisada pela equipe.</p></div> : <form className="contact-form review-form" onSubmit={submit}><fieldset className="rating-options"><legend>Sua nota (obrigatória)</legend>{[1,2,3,4,5].map(value => <label key={value}><input type="radio" name="rating" value={value} checked={rating === String(value)} onChange={event => setRating(event.target.value)} required disabled={status === 'sending'}/>{value} {value === 1 ? 'estrela' : 'estrelas'}</label>)}</fieldset>{[['client_name','Seu nome'],['company_position','Cargo e empresa'],['quote','Sua avaliação']].map(([name,label]) => <div className="field" key={name}><label htmlFor={name}>{label}</label>{name === 'quote' ? <textarea id={name} name={name} value={values[name]} onChange={event=>setValues(previous=>({...previous,[name]:event.target.value}))} required disabled={status==='sending'} rows={6}/> : <input id={name} name={name} value={values[name]} onChange={event=>setValues(previous=>({...previous,[name]:event.target.value}))} required disabled={status==='sending'}/>}</div>)}{error&&<p className="form-message" role="alert">{error}</p>}<button type="submit" className="button primary" disabled={status==='sending'}>{status==='sending'?'Enviando…':'Enviar avaliação'}</button></form>}</section></>;
+}

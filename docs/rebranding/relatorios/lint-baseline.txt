@@ -1,0 +1,15 @@
+Comando: npm run lint
+Código de saída: 1
+Base: 3b23b9a32e3d4396912a1fb0c5524cb4ae451b78, antes das alterações de produto
+
+chat-widget/js/chat-widget.js:137:25 no-unused-vars: 'save'
+public/js/chat-widget.js:137:25 no-unused-vars: 'save'
+src/auth/AuthContext.jsx:43:14 react-refresh/only-export-components
+src/components/Layout.jsx:25:16 no-unused-vars: 'e'
+src/context/ThemeContext.jsx:38:14 react-refresh/only-export-components
+src/dashboard/components/Sidebar.jsx:13:9 no-unused-vars: 'navigate'
+src/dashboard/pages/SecurityPage.jsx:15:27 no-unused-vars: 'error'
+src/pages/LoginPage.jsx:48:15 no-unused-vars: 'data'
+tailwind.config.js:31:5 no-undef: 'require'
+
+9 erros, 0 avisos. Falhas preexistentes, não corrigidas nesta linha de base.

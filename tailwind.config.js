@@ -1,3 +1,4 @@
+import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -11,6 +12,8 @@ export default {
         "primary": "var(--primary-color)",
         "primary-hover": "var(--primary-hover-color)",
         "background-light": "var(--background-color)",
+        "background": "var(--background-color)",
+        "text": "var(--text-color)",
         "background-dark": "var(--surface-color)", // Ajuste semântico
         "surface": "var(--surface-color)",
         "text-main": "var(--text-color)",
@@ -18,9 +21,9 @@ export default {
         "border": "var(--border-color)",
       },
       fontFamily: {
-        "sans": ["Montserrat", "sans-serif"],
-        "serif": ["Playfair Display", "serif"],
-        "display": ["Playfair Display", "serif"]
+        "sans": ["Manrope", "sans-serif"],
+        "serif": ["Source Serif 4", "serif"],
+        "display": ["Source Serif 4", "serif"]
       },
       letterSpacing: {
         widest: '.25em', // Para o subtítulo "ENGENHARIA DE..."
@@ -28,6 +31,6 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/forms'), // Necessário para estilizar formulários
+    forms,
   ],
 }

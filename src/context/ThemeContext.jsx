@@ -1,38 +1,35 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-
-const ThemeContext = createContext();
-
-export const ThemeProvider = ({ children }) => {
-  // Inicializa o tema verificando o localStorage, ou a preferência do sistema, ou 'light' como padrão
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme;
-    }
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return userPrefersDark ? 'dark' : 'light';
-  });
-
-  useEffect(() => {
-    // Aplica a classe 'dark' ao body e salva no localStorage sempre que o tema mudar
-    if (theme === 'dark') {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
-// Hook customizado para facilitar o uso do contexto
-export const useTheme = () => useContext(ThemeContext);
+import { useEffect, useSyncExternalStore } from 'react';
+let temporaryTheme = null;
+function currentTheme() {
+  if (typeof window === 'undefined') return 'light';
+  if (temporaryTheme) return temporaryTheme;
+  try { const stored = localStorage.getItem('theme'); if (stored === 'dark' || stored === 'light') return stored; } catch { /* Optional storage. */ }
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function applyTheme() {
+  const dark = currentTheme() === 'dark';
+  document.documentElement.classList.toggle('dark', dark);
+  document.body.classList.toggle('dark', dark);
+}
+function subscribe(callback) {
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  const update = () => { applyTheme(); callback(); };
+  window.addEventListener('codersa:theme', update);
+  window.addEventListener('storage', update);
+  media.addEventListener('change', update);
+  return () => { window.removeEventListener('codersa:theme', update); window.removeEventListener('storage', update); media.removeEventListener('change', update); };
+}
+export function ThemeProvider({ children }) {
+  useEffect(() => { applyTheme(); return subscribe(() => {}); }, []);
+  return children;
+}
+// Each consumer uses the server snapshot during its own hydration.
+// eslint-disable-next-line react-refresh/only-export-components -- Shared theme hook preserves the existing consumer API.
+export function useTheme() {
+  const theme = useSyncExternalStore(subscribe, currentTheme, () => 'light');
+  return { theme, toggleTheme: () => {
+    const next = currentTheme() === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem('theme', next); temporaryTheme = null; } catch { temporaryTheme = next; }
+    window.dispatchEvent(new Event('codersa:theme'));
+  } };
+}
