@@ -8,3 +8,18 @@ body.dark .public-site{--paper:#15181e;--ink:#f7f7f2;--muted:#aab5c5;--blue:#8ca
 
 .public-site .founder-initials{color:var(--ink)}
 .public-site h1,.public-site h2,.public-site h3,.public-site p,.public-site a,.public-site button,.public-site summary{overflow-wrap:anywhere}.public-site .hero>* ,.public-site .contact-grid>* ,.public-site .people>*{min-width:0}.public-site .button{white-space:normal;max-width:100%}.public-site .founder>div{min-width:0}
+
+.public-site .blueprint-highlight{display:grid;grid-template-columns:1.2fr 1fr;gap:7vw;border-block:1px solid var(--line)}
+.public-site .blueprint-highlight>div{min-width:0}.public-site .blueprint-highlight p{max-width:650px}
+.public-site .blueprint-highlight h2 em,.public-site .blueprint-deliverables h2 em{color:var(--blue)}
+.public-site .blueprint-outline{padding:32px;border:1px solid var(--control);background:var(--field);align-self:center}
+.public-site .blueprint-outline h3{font-size:25px}.public-site .blueprint-outline ol{list-style:decimal;padding-left:22px}.public-site .blueprint-outline li{padding:12px 0;border-bottom:1px solid var(--line)}
+.public-site .blueprint-actions{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:28px}
+.public-site .blueprint-deliverables ol{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;list-style:decimal;padding-left:24px;margin-top:36px}.public-site .blueprint-deliverables li{padding:18px 8px;border-bottom:1px solid var(--line)}
+.public-site .blueprint-variants{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}.public-site .blueprint-variants article{border-top:1px solid var(--control);padding-top:22px}.public-site .blueprint-variants h3{font-size:24px}
+.public-site .package-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:36px 0}.public-site .package-grid article{border:1px solid var(--control);padding:28px;background:var(--field)}.public-site .package-grid h3{font-size:26px}.public-site .package-grid p{font-size:15px}
+.public-site .field select{display:block;width:100%;max-width:100%;border:1px solid var(--control);background:var(--field);color:var(--ink);font:inherit;padding:15px 17px;line-height:1.5;border-radius:0}
+.public-site .contact-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+@media(max-width:1100px){.public-site .header-contact{display:none}.public-site .site-header nav{gap:14px}.public-site .package-grid{grid-template-columns:1fr}}
+@media(max-width:850px){.public-site .blueprint-highlight,.public-site .blueprint-deliverables ol,.public-site .blueprint-variants{grid-template-columns:1fr}.public-site .blueprint-highlight{gap:28px}.public-site .blueprint-outline{padding:24px}}
+@media(max-width:500px){.public-site .blueprint-actions{align-items:start;flex-direction:column}.public-site .blueprint-outline{padding:20px}.public-site .package-grid article{padding:22px}}

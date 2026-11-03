@@ -1,0 +1,63 @@
+{
+  "rows": [
+    {
+      "route": "/",
+      "baseline": 100,
+      "performance": 100,
+      "lcpBeforeMs": 1354.9596,
+      "lcpMs": 1357.0027,
+      "cls": 0
+    },
+    {
+      "route": "/servicos",
+      "baseline": 100,
+      "performance": 90,
+      "lcpBeforeMs": 1354.018,
+      "lcpMs": 2897.3563,
+      "cls": 0.0005589918034268442
+    },
+    {
+      "route": "/servicos/blueprint",
+      "baseline": null,
+      "performance": 100,
+      "lcpBeforeMs": null,
+      "lcpMs": 1357.0124,
+      "cls": 0.0007879321871473824
+    },
+    {
+      "route": "/processo",
+      "baseline": 100,
+      "performance": 100,
+      "lcpBeforeMs": 1353.8617,
+      "lcpMs": 1358.2302,
+      "cls": 0.0005590348050015475
+    },
+    {
+      "route": "/portfolio",
+      "baseline": 100,
+      "performance": 100,
+      "lcpBeforeMs": 1353.9089,
+      "lcpMs": 1504.9932,
+      "cls": 0.0005598518349209108
+    },
+    {
+      "route": "/sobre",
+      "baseline": 100,
+      "performance": 100,
+      "lcpBeforeMs": 1354.0383000000002,
+      "lcpMs": 1356.6104,
+      "cls": 0.0005603678538173508
+    },
+    {
+      "route": "/contato",
+      "baseline": 91,
+      "performance": 91,
+      "lcpBeforeMs": 2794.2039,
+      "lcpMs": 2775.6692000000003,
+      "cls": 0.0002982159205676059
+    }
+  ],
+  "passed": true,
+  "inp": "Not measured. Lighthouse navigation does not establish field INP.",
+  "conditions": "Same local production preview, mobile simulated throttling, 3 runs per route. Not field or production measurements."
+}

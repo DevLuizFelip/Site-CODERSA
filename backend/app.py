@@ -1,35 +1,22 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from html import escape
+try:
+    from .contact_security import configure_contact, read_contact, PUBLIC_ERROR
+except ImportError:
+    from contact_security import configure_contact, read_contact, PUBLIC_ERROR
 import os
 import time
 import random
 from mailersend import MailerSendClient, EmailBuilder
 
 app = Flask(__name__)
-# CORS explícito para o domínio de produção + localhost
-CORS(
-    app,
-    resources={
-        r"/*": {
-            "origins": [
-                "https://www.codersa.com.br",
-                "https://codersa.com.br",
-                "http://localhost:5173",
-                "http://localhost:5174",
-                "http://localhost:5175",
-                "http://localhost:8000"
-            ],
-            "methods": ["POST", "OPTIONS", "GET"],
-            "allow_headers": ["Content-Type"],
-        }
-    },
-)
+configure_contact(app)
 
 # Configurações via MailerSend (Variáveis de Ambiente)
 MAILERSEND_API_KEY = os.environ.get("MAILERSEND_API_KEY")
 MAILERSEND_FROM_EMAIL = os.environ.get("MAILERSEND_FROM_EMAIL")
 MAILERSEND_FROM_NAME = os.environ.get("MAILERSEND_FROM_NAME", "Codersa")
-DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "luicostasantana@outlook.com")
+DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL")
 
 ms = MailerSendClient(MAILERSEND_API_KEY) if MAILERSEND_API_KEY else None
 
@@ -43,26 +30,20 @@ def load_template(nome, email, assunto, mensagem):
     
     # Usando .format() com segurança (o template HTML deve ter chaves duplicadas para CSS)
     return template.format(
-        nome=nome,
-        email=email,
-        assunto=assunto,
-        mensagem=mensagem
+        nome=escape(nome, quote=True),
+        email=escape(email, quote=True),
+        assunto=escape(assunto, quote=True),
+        mensagem=escape(mensagem, quote=True)
     )
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
-    if not MAILERSEND_API_KEY or not MAILERSEND_FROM_EMAIL:
-        return jsonify({"success": False, "message": "MAILERSEND_API_KEY/MAILERSEND_FROM_EMAIL não configuradas."}), 500
-    if ms is None:
-        return jsonify({"success": False, "message": "MailerSendClient não inicializado."}), 500
-
-    data = request.json
-    nome = data.get('nome')
-    email_cliente = data.get('email')
-    assunto = data.get('assunto')
-    mensagem_texto = data.get('mensagem')
-    if not nome or not email_cliente or not assunto or not mensagem_texto:
-        return jsonify({"success": False, "message": "Campos obrigatórios ausentes."}), 400
+    data, failure = read_contact(app)
+    if failure is not None:
+        return failure
+    if not MAILERSEND_API_KEY or not MAILERSEND_FROM_EMAIL or not DESTINATION_EMAIL or ms is None:
+        return jsonify(success=False, message=PUBLIC_ERROR), 503
+    nome, email_cliente, assunto, mensagem_texto = (data[key] for key in ("nome", "email", "assunto", "mensagem"))
 
     try:
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
@@ -79,9 +60,9 @@ def send_email():
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!", "id": getattr(response, "message_id", None)}), 200
 
-    except Exception as e:
-        print(f"Erro ao enviar email (MailerSend SDK): {e}")
-        return jsonify({"success": False, "message": str(e)}), 500
+    except Exception:
+        app.logger.warning("contact_delivery_failed")
+        return jsonify(success=False, message=PUBLIC_ERROR), 502
 
 @app.route('/api/assistente', methods=['POST'])
 def assistant_endpoint():

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 const origin='http://127.0.0.1:4173';
 const results=[];const issues=[];
-const out=new URL('../docs/rebranding/relatorios/capturas/',import.meta.url);await mkdir(out,{recursive:true});
+const out=new URL('../docs/phase-2/reports/final/capturas/',import.meta.url);await mkdir(out,{recursive:true});
 const apiPattern='**/rest/v1/**';
 const fulfill=(route,data,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(data)});
 async function context(options={}){
@@ -18,10 +18,10 @@ async function context(options={}){
 }
 async function record(name,work){try{await work();results.push({name,passed:true});console.log('PASS '+name);}catch(error){issues.push({name,message:error.message});results.push({name,passed:false});console.log('FAIL '+name+': '+error.message.slice(0,350));}}
 try{
- for(const theme of ['light','dark'])for(const width of [320,375,768,1440]){
+ for(const theme of ['light','dark'])for(const width of [320,360,375,390,768,1024,1440]){
   const ctx=await context({colorScheme:theme,viewport:{width,height:1000}});const page=await ctx.newPage();
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
-  for(const route of ['/','/servicos','/processo','/portfolio','/sobre','/contato']){
+  for(const route of ['/','/servicos','/servicos/blueprint','/processo','/portfolio','/sobre','/contato']){
    await record(`layout ${theme} ${width} ${route}`,async()=>{
     await page.goto(origin+route);await page.locator('h1').waitFor();await page.evaluate(()=>document.fonts.ready);
     await page.getByRole('button',{name:theme==='dark'?'Ativar tema claro':'Ativar tema escuro'}).waitFor();
@@ -54,7 +54,7 @@ try{
    const client=await ctx.newCDPSession(page);await client.send('Accessibility.enable');const tree=await client.send('Accessibility.getFullAXTree');
    const sample=tree.nodes.filter(node=>!node.ignored&&['heading','link','button','textbox','navigation','main'].includes(node.role?.value)).map(node=>({role:node.role.value,name:node.name?.value}));
    assert.ok(sample.some(node=>node.role==='heading'&&node.name));assert.ok(sample.some(node=>node.role==='main'));
-   await writeFile(new URL('../docs/rebranding/relatorios/ax-'+(route==='/'?'home':'contato')+'.json',import.meta.url),JSON.stringify(sample,null,2)+'\n');
+   await writeFile(new URL('../docs/phase-2/reports/final/ax-'+(route==='/'?'home':'contato')+'.json',import.meta.url),JSON.stringify(sample,null,2)+'\n');
   }
   await ctx.close();
  });
@@ -62,17 +62,34 @@ try{
   const ctx=await context();const page=await ctx.newPage();let requests=0;let payload;let popups=0;
   page.on('popup',()=>popups++);await page.addInitScript(()=>{window.testEvents=[];addEventListener('codersa:analytics',e=>window.testEvents.push(e.detail));});
   await ctx.route('**/send-email',async route=>{requests++;payload=route.request().postDataJSON();await new Promise(resolve=>setTimeout(resolve,200));await fulfill(route,{success:true});});
-  await page.goto(origin+'/contato');await page.getByRole('button',{name:'Enviar solicitação'}).click();assert.equal(requests,0);assert.equal(await page.locator('[aria-invalid=true]').count(),4);assert.equal(await page.locator(':focus').getAttribute('id'),'nome');
+  await page.goto(origin+'/contato');await page.getByRole('button',{name:'Enviar solicitação'}).click();assert.equal(requests,0);assert.equal(await page.locator('[aria-invalid=true]').count(),5);assert.equal(await page.locator(':focus').getAttribute('id'),'nome');
   for(const [field,value] of Object.entries({nome:'Pessoa Teste',email:'teste@example.com',assunto:'Teste controlado',mensagem:'Descrição de teste local.'}))await page.locator('#'+field).fill(value);
-  await page.locator('form').evaluate(form=>{form.requestSubmit();form.requestSubmit();});await page.getByRole('heading',{name:'Solicitação recebida.'}).waitFor();assert.equal(requests,1);assert.deepEqual(Object.keys(payload),['nome','email','assunto','mensagem']);assert.equal(popups,0);
+  await page.locator('#servico').selectOption('blueprint');await page.locator('form').evaluate(form=>{form.requestSubmit();form.requestSubmit();});await page.getByRole('heading',{name:'Solicitação recebida.'}).waitFor();assert.equal(requests,1);assert.deepEqual(Object.keys(payload),['nome','email','assunto','mensagem']);assert.equal(popups,0);assert.match(payload.assunto,/CODERSA Blueprint/);assert.match(payload.mensagem,/Preferência de contato: E-mail/);assert.equal(await page.locator(':focus').innerText(),'Solicitação recebida.');
   const events=await page.evaluate(()=>window.testEvents);assert.equal(events.filter(e=>e.name==='contact_submit_success').length,1);assert.equal(JSON.stringify(events).includes('teste@example.com'),false);assert.ok(await page.getByRole('link',{name:'Abrir WhatsApp'}).isVisible());await ctx.close();
  });
  for(const mode of ['http','negative','network','timeout'])await record('contact '+mode+' retains fields and permits retry',async()=>{
   const ctx=await context();const page=await ctx.newPage();await page.addInitScript(()=>{window.testEvents=[];addEventListener('codersa:analytics',e=>window.testEvents.push(e.detail));});
   await ctx.route('**/send-email',route=>mode==='network'?route.abort('failed'):mode==='timeout'?new Promise(()=>{}):fulfill(route,{success:false},mode==='http'?500:200));
   await page.goto(origin+'/contato');for(const [field,value] of Object.entries({nome:'Pessoa Teste',email:'teste@example.com',assunto:'Teste',mensagem:'Processo de teste.'}))await page.locator('#'+field).fill(value);
-  await page.getByRole('button',{name:'Enviar solicitação'}).click();await page.getByRole('alert').waitFor({timeout:20000});assert.equal(await page.locator('#mensagem').inputValue(),'Processo de teste.');assert.equal(await page.getByRole('button',{name:'Enviar solicitação'}).isEnabled(),true);assert.equal((await page.evaluate(()=>window.testEvents)).filter(e=>e.name==='contact_submit_success').length,0);
+  await page.locator('#servico').selectOption('ia');await page.getByRole('button',{name:'Enviar solicitação'}).click();await page.getByRole('alert').waitFor({timeout:20000});assert.equal(await page.locator('#mensagem').inputValue(),'Processo de teste.');assert.equal(await page.getByRole('button',{name:'Enviar solicitação'}).isEnabled(),true);assert.equal((await page.evaluate(()=>window.testEvents)).filter(e=>e.name==='contact_submit_success').length,0);
   await ctx.unroute('**/send-email');await ctx.route('**/send-email',route=>fulfill(route,{success:true}));await page.getByRole('button',{name:'Enviar solicitação'}).click();await page.getByRole('heading',{name:'Solicitação recebida.'}).waitFor();await ctx.close();
+ });
+
+ await record('Blueprint page, navigation, qualification context and unknown parameter',async()=>{
+  const ctx=await context({viewport:{width:390,height:900}});const page=await ctx.newPage();
+  await page.addInitScript(()=>{window.testEvents=[];addEventListener('codersa:analytics',e=>window.testEvents.push(e.detail));});
+  await page.goto(origin);await page.getByRole('button',{name:'Menu'}).click();await page.getByRole('navigation',{name:'Principal'}).getByRole('link',{name:'Blueprint',exact:true}).click();await page.waitForURL('**/servicos/blueprint');
+  assert.equal(await page.getByRole('button',{name:'Menu'}).getAttribute('aria-expanded'),'false');
+  assert.equal(await page.locator('.package-grid article').count(),3);
+  for(const question of await page.locator('.faq summary').all()){await question.focus();await page.keyboard.press('Enter');assert.equal(await question.evaluate(node=>node.parentElement.open),true);}
+  await page.getByRole('link',{name:'Solicitar um Blueprint'}).first().click();await page.waitForURL('**/contato?servico=blueprint');await page.waitForFunction(()=>document.querySelector('#servico')?.value==='blueprint');
+  assert.equal(await page.locator('#servico').inputValue(),'blueprint');await page.locator('#servico').selectOption('automacao');assert.equal(await page.locator('#servico').inputValue(),'automacao');
+  assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://www.codersa.com.br/contato');
+  assert.equal((await page.evaluate(()=>window.testEvents)).filter(e=>e.name==='blueprint_cta_click').length,1);
+  await page.goto(origin+'/contato?servico=unknown%40example.com');assert.equal(await page.locator('#servico').inputValue(),'');
+  await page.locator('#preferencia').selectOption('whatsapp');await page.getByRole('button',{name:'Enviar solicitação'}).click();assert.equal(await page.locator('#telefone').getAttribute('aria-invalid'),'true');await page.locator('#preferencia').selectOption('email');assert.equal(await page.locator('#telefone').count(),0);
+  await page.goto(origin+'/servicos#automacao');await page.getByText('Automação e integrações',{exact:true}).click();await page.locator('#automacao').getByRole('link',{name:'Conversar sobre esta solução'}).click();await page.waitForURL('**/contato?servico=automacao');await page.waitForFunction(()=>document.querySelector('#servico')?.value==='automacao');
+  await ctx.close();
  });
  await record('portfolio empty, failure, retry and public records only',async()=>{
   const ctx=await context();const page=await ctx.newPage();await page.goto(origin+'/portfolio');await page.getByText('Ainda não há projetos disponíveis para exibição.').waitFor();
@@ -98,9 +115,9 @@ try{
   await ctx.route('**/auth/v1/**',route=>fulfill(route,user));await page.goto(origin+'/admin');await page.locator('.dashboard-layout').waitFor();await page.screenshot({path:fileURLToPath(new URL('admin-'+theme+'.png',out))});assert.equal(new URL(page.url()).pathname,'/admin');await ctx.close();
  });
  await record('initial HTML works without scripts and API does not return SPA HTML',async()=>{
-  const ctx=await browser.newContext({javaScriptEnabled:false});const page=await ctx.newPage();const titles=new Set();for(const route of ['/','/servicos','/processo','/portfolio','/sobre','/contato']){await page.goto(origin+route);assert.equal(await page.locator('h1').count(),1);titles.add(await page.title());}assert.equal(titles.size,6);assert.equal(await page.getByRole('button',{name:'Enviar solicitação'}).isDisabled(),true);const api=await page.request.get(origin+'/api/send-email');assert.equal(api.headers()['content-type'],'application/json');await ctx.close();
+  const ctx=await browser.newContext({javaScriptEnabled:false});const page=await ctx.newPage();const titles=new Set();for(const route of ['/','/servicos','/servicos/blueprint','/processo','/portfolio','/sobre','/contato']){await page.goto(origin+route);assert.equal(await page.locator('h1').count(),1);titles.add(await page.title());}assert.equal(titles.size,7);assert.equal(await page.getByRole('button',{name:'Enviar solicitação'}).isDisabled(),true);const api=await page.request.get(origin+'/api/send-email');assert.equal(api.headers()['content-type'],'application/json');await ctx.close();
  });
 }finally{
- await writeFile(new URL('../docs/rebranding/relatorios/browser-check.json',import.meta.url),JSON.stringify({browser:browser.version(),results,issues,passed:issues.length===0},null,2)+'\n');
+ await writeFile(new URL('../docs/phase-2/reports/final/browser-check.json',import.meta.url),JSON.stringify({browser:browser.version(),results,issues,passed:issues.length===0},null,2)+'\n');
  await browser.close();console.log(JSON.stringify({checks:results.length,failures:issues.length},null,2));if(issues.length)process.exitCode=1;
 }

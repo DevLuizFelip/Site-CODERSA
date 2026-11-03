@@ -1,0 +1,70 @@
+[
+  {
+    "role": "link",
+    "name": "Pular para o conteúdo"
+  },
+  {
+    "role": "main",
+    "name": ""
+  },
+  {
+    "role": "link",
+    "name": "CODERSA — início"
+  },
+  {
+    "role": "button",
+    "name": "Ativar tema escuro"
+  },
+  {
+    "role": "button",
+    "name": "Menu"
+  },
+  {
+    "role": "link",
+    "name": "CODERSA — início"
+  },
+  {
+    "role": "link",
+    "name": "codersa.ai@outlook.com"
+  },
+  {
+    "role": "heading",
+    "name": "Vamos entender o seu processo."
+  },
+  {
+    "role": "textbox",
+    "name": "Nome"
+  },
+  {
+    "role": "textbox",
+    "name": "E-mail"
+  },
+  {
+    "role": "textbox",
+    "name": "Assunto"
+  },
+  {
+    "role": "textbox",
+    "name": "Descrição do processo ou solicitação"
+  },
+  {
+    "role": "button",
+    "name": "Enviar solicitação"
+  },
+  {
+    "role": "heading",
+    "name": "Vendas e suporte."
+  },
+  {
+    "role": "link",
+    "name": "E-mail codersa.ai@outlook.com"
+  },
+  {
+    "role": "link",
+    "name": "WhatsApp +55 11 93619-3760"
+  },
+  {
+    "role": "link",
+    "name": "Agendar uma conversa Consulte os horários disponíveis"
+  }
+]

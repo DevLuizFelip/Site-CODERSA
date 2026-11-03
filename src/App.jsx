@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
+import BlueprintPage from './pages/BlueprintPage';
 import AboutPage from './pages/AboutPage';
 import ProcessPage from './pages/ProcessPage';
 import PortfolioPage from './pages/PortfolioPage';
@@ -23,6 +24,7 @@ const SecurityPage = lazy(() => import('./dashboard/pages/SecurityPage'));
 export default function App() {
   return <ThemeProvider><Toaster position="top-right"/><Suspense fallback={<p className="route-loading" role="status">Carregando…</p>}><Routes>
     <Route path="/" element={<Layout/>}>
+      <Route path="servicos/blueprint" element={<BlueprintPage/>}/>
       <Route index element={<HomePage/>}/><Route path="servicos" element={<ServicesPage/>}/><Route path="sobre" element={<AboutPage/>}/><Route path="processo" element={<ProcessPage/>}/><Route path="portfolio" element={<PortfolioPage/>}/><Route path="contato" element={<ContactPage/>}/><Route path="avaliar" element={<LeaveReviewPage/>}/>
       <Route path="*" element={<section className="section-pad"><h1>Página não encontrada.</h1><p>Use a navegação para encontrar as soluções ou entrar em contato.</p></section>}/>
     </Route>
