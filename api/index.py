@@ -1,25 +1,23 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from html import escape
+from backend.contact_security import configure_contact, read_contact, PUBLIC_ERROR
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 
 app = Flask(__name__)
-CORS(app)
+configure_contact(app)
 
 # Configurações (use Variáveis de Ambiente; não commitar credenciais)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL", "Codersa.ai@outlook.com")
+DESTINATION_EMAIL = os.environ.get("DESTINATION_EMAIL")
 
 def load_template(nome, email, assunto, mensagem):
-    # Caminho ajustado para Vercel (arquivo deve estar junto na pasta api ou configurado corretamente)
-    # Na Vercel, o sistema de arquivos é diferente. Vamos simplificar colocando o HTML direto aqui 
-    # ou lendo de forma robusta. Para serverless simples, string multiline é mais seguro.
-    
+    nome, email, assunto, mensagem = (escape(value, quote=True) for value in (nome, email, assunto, mensagem))
     return f"""
     <!DOCTYPE html>
     <html>
@@ -85,36 +83,34 @@ def load_template(nome, email, assunto, mensagem):
 
 @app.route('/api/send-email', methods=['POST'])
 def send_email():
-    if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-        return jsonify({"success": False, "message": "EMAIL_ADDRESS/EMAIL_PASSWORD não configurados."}), 500
-    data = request.json
-    
-    nome = data.get('nome')
-    email_cliente = data.get('email')
-    assunto = data.get('assunto')
-    mensagem_texto = data.get('mensagem')
+    data, failure = read_contact(app)
+    if failure is not None:
+        return failure
+    if not EMAIL_ADDRESS or not EMAIL_PASSWORD or not DESTINATION_EMAIL:
+        return jsonify(success=False, message=PUBLIC_ERROR), 503
+    nome, email_cliente, assunto, mensagem_texto = (data[key] for key in ("nome", "email", "assunto", "mensagem"))
 
     try:
         msg = MIMEMultipart()
         msg['From'] = EMAIL_ADDRESS
         msg['To'] = DESTINATION_EMAIL
         msg['Subject'] = f"Novo Contato: {assunto}"
+        msg['Reply-To'] = email_cliente
 
         html_content = load_template(nome, email_cliente, assunto, mensagem_texto)
         msg.attach(MIMEText(html_content, 'html'))
 
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.send_message(msg)
-        server.quit()
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
+            server.starttls()
+            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            server.send_message(msg)
 
         return jsonify({"success": True, "message": "Email enviado com sucesso!"}), 200
 
-    except Exception as e:
-        print(f"Erro ao enviar email: {e}")
-        return jsonify({"success": False, "message": str(e)}), 500
+    except Exception:
+        app.logger.warning("contact_delivery_failed")
+        return jsonify(success=False, message=PUBLIC_ERROR), 502
 
 # Vercel serverless function entrypoint
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000)

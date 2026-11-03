@@ -3,6 +3,7 @@
     { "source": "/api/(.*)", "destination": "/api/index.py" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/servicos", "destination": "/servicos/index.html" },
+    { "source": "/servicos/blueprint", "destination": "/servicos/blueprint/index.html" },
     { "source": "/processo", "destination": "/processo/index.html" },
     { "source": "/portfolio", "destination": "/portfolio/index.html" },
     { "source": "/sobre", "destination": "/sobre/index.html" },

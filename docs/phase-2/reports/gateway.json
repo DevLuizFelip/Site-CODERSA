@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "instances": 2,
+  "accepted_initial": 5,
+  "limited": 3,
+  "origin_direct": [
+    403,
+    403
+  ],
+  "recovered_after_seconds": 13,
+  "provider": "fake; no real mail",
+  "nginx": "nginx version: nginx/1.31.8"
+}

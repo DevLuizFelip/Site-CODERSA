@@ -1,0 +1,16 @@
+[
+  {
+    "route": "/servicos/blueprint",
+    "theme": "light",
+    "textZoom": "200%",
+    "overflow": false,
+    "currentNavigationItems": 1
+  },
+  {
+    "route": "/servicos/blueprint",
+    "theme": "dark",
+    "textZoom": "200%",
+    "overflow": false,
+    "currentNavigationItems": 1
+  }
+]

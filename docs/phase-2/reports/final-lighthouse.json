@@ -1,0 +1,2115 @@
+{
+  "referenceDate": "2026-11-03",
+  "timeZone": "America/Sao_Paulo",
+  "node": "v24.21.0",
+  "browser": "156.0.8078.80",
+  "lighthouse": "13.6.0",
+  "sourceCommit": "ac2865ad6b3832c54b5235ab245cd18c96ad0434 + codersa-phase-2-services working tree",
+  "origin": "http://127.0.0.1:4173",
+  "mode": "local production build, mobile simulated throttling, light, cold storage per run",
+  "note": "Real public GET dependencies; no form submissions. Not a production-domain or field audit.",
+  "runs": [
+    {
+      "route": "/",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:04:48.685Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1353.9029,
+        "largest-contentful-paint": 1353.9029,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1353.9029
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 20 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 266 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 9 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 640 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:04:56.072Z",
+      "scores": {
+        "performance": 89,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2922.8903,
+        "largest-contentful-paint": 2922.8903,
+        "total-blocking-time": 73.5,
+        "cumulative-layout-shift": 0,
+        "speed-index": 2922.8903
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.52,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.8,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "score": 0.99,
+          "displayValue": "70 ms"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.8,
+          "displayValue": "160 ms"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.92,
+          "displayValue": "3.5 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 20 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 265 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 9 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 750 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:05:03.462Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1357.0027,
+        "largest-contentful-paint": 1357.0027,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "speed-index": 1357.0027
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 20 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 266 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 9 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 750 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:05:11.058Z",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2902.4082000000003,
+        "largest-contentful-paint": 2902.4082000000003,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005589918034268442,
+        "speed-index": 2902.4082000000003
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.53,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.8,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.96,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 271 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 590 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:05:18.421Z",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2897.3563,
+        "largest-contentful-paint": 2897.3563,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005589918034268442,
+        "speed-index": 2897.3563
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.53,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.81,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.96,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 271 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 600 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:05:25.621Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1506.4953999999998,
+        "largest-contentful-paint": 1506.4953999999998,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005589918034268442,
+        "speed-index": 1506.4953999999998
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.96,
+          "displayValue": "1.5 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 271 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 750 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos/blueprint",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:05:32.833Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1355.7206,
+        "largest-contentful-paint": 1355.7206,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0007879321871473824,
+        "speed-index": 1355.7206
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 270 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "score": 0
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 580 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos/blueprint",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:05:40.261Z",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2912.8916,
+        "largest-contentful-paint": 2912.8916,
+        "total-blocking-time": 3,
+        "cumulative-layout-shift": 0.0007879321871473824,
+        "speed-index": 2912.8916
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.52,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.8,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.95,
+          "displayValue": "3.2 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 270 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 730 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/servicos/blueprint",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:05:47.564Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1357.0124,
+        "largest-contentful-paint": 1357.0124,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0007879321871473824,
+        "speed-index": 1357.0124
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 270 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 7 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 590 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/processo",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:05:54.896Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1358.2302,
+        "largest-contentful-paint": 1358.2302,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005590348050015475,
+        "speed-index": 1358.2302
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 590 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/processo",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:06:02.205Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1504.8751000000002,
+        "largest-contentful-paint": 1504.8751000000002,
+        "total-blocking-time": 0.5,
+        "cumulative-layout-shift": 0.0005590348050015475,
+        "speed-index": 1504.8751000000002
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.96,
+          "displayValue": "1.5 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.98,
+          "displayValue": "2.5 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 740 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/processo",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:06:09.484Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1355.0163000000002,
+        "largest-contentful-paint": 1355.0163000000002,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005590348050015475,
+        "speed-index": 1355.0163000000002
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 32 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 590 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/portfolio",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:06:16.781Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1356.3507999999997,
+        "largest-contentful-paint": 1356.3507999999997,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005598518349209108,
+        "speed-index": 1356.3507999999997
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 265 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 620 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/portfolio",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:06:23.856Z",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2901.1778,
+        "largest-contentful-paint": 2901.1778,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005598518349209108,
+        "speed-index": 2901.1778
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.53,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.8,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.96,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 265 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 610 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/portfolio",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:06:30.982Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1504.9932,
+        "largest-contentful-paint": 1504.9932,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005598518349209108,
+        "speed-index": 1504.9932
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.96,
+          "displayValue": "1.5 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 265 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 760 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/sobre",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:06:37.948Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1356.6104,
+        "largest-contentful-paint": 1356.6104,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005603678538173508,
+        "speed-index": 1356.6104
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 34 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 750 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/sobre",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:06:44.989Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1355.9528,
+        "largest-contentful-paint": 1355.9528,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005603678538173508,
+        "speed-index": 1355.9528
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 34 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 560 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/sobre",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:06:51.890Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1356.7895,
+        "largest-contentful-paint": 1356.7895,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0005603678538173508,
+        "speed-index": 1356.7895
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 34 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 273 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 4 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 610 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/contato",
+      "run": 1,
+      "fetchTime": "2026-11-03T03:06:58.884Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 1355.3549000000003,
+        "largest-contentful-paint": 1355.3549000000003,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0002982159205676059,
+        "speed-index": 1355.3549000000003
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.98,
+          "displayValue": "1.4 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 262 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 610 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/contato",
+      "run": 2,
+      "fetchTime": "2026-11-03T03:07:05.932Z",
+      "scores": {
+        "performance": 91,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2775.6692000000003,
+        "largest-contentful-paint": 2775.6692000000003,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0002982159205676059,
+        "speed-index": 2775.6692000000003
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.57,
+          "displayValue": "2.8 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.84,
+          "displayValue": "2.8 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.96,
+          "displayValue": "2.8 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.97,
+          "displayValue": "2.8 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0.5,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 262 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 580 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    },
+    {
+      "route": "/contato",
+      "run": 3,
+      "fetchTime": "2026-11-03T03:07:12.949Z",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": 2905.9356,
+        "largest-contentful-paint": 2905.9356,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0002982159205676059,
+        "speed-index": 2905.9356
+      },
+      "runtimeError": null,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "1 insecure request found"
+        },
+        {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.53,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.8,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.95,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "errors-in-console",
+          "title": "Browser errors were logged to the console",
+          "score": 0
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.96,
+          "displayValue": "2.9 s"
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 33 KiB"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 262 KiB"
+        },
+        {
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons"
+        },
+        {
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 5 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 620 ms"
+        }
+      ],
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+# Render with envsubst using ONLY the explicitly listed CONTACT_* variables.
+# Bind TLS at the trusted ingress. This listener must remain on a private network.
+worker_processes 1;
+pid logs/contact-nginx.pid;
+error_log logs/contact-error.log crit;
+events { worker_connections 256; }
+http {
+    map_hash_bucket_size 64;
+    access_log off;
+    client_max_body_size 40k;
+    client_body_timeout 10s;
+    map $http_origin $contact_origin {
+        default "";
+        "https://www.codersa.com.br" $http_origin;
+        "https://codersa.com.br" $http_origin;
+    }
+    map $request_method $contact_rate_key {
+        default $binary_remote_addr;
+        OPTIONS "";
+    }
+    limit_req_zone $contact_rate_key zone=contact:10m rate=5r/m;
+    upstream contact_backend {
+        server ${CONTACT_BACKEND_1};
+        server ${CONTACT_BACKEND_2};
+    }
+    server {
+        listen 127.0.0.1:${CONTACT_GATEWAY_PORT};
+        server_tokens off;
+        location = ${CONTACT_PUBLIC_PATH} {
+            add_header Access-Control-Allow-Origin $contact_origin always;
+            add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+            add_header Access-Control-Allow-Headers "Content-Type" always;
+            add_header Vary "Origin" always;
+            if ($request_method = OPTIONS) { return 204; }
+            limit_except POST { deny all; }
+            limit_req zone=contact burst=4 nodelay;
+            limit_req_status 429;
+            error_page 429 = @contact_limited;
+            proxy_hide_header Access-Control-Allow-Origin;
+            proxy_hide_header Access-Control-Allow-Methods;
+            proxy_hide_header Access-Control-Allow-Headers;
+            proxy_set_header X-Contact-Gateway "${CONTACT_GATEWAY_SECRET}";
+            proxy_set_header Host "${CONTACT_ORIGIN_HOST}";
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_ssl_server_name on;
+            proxy_ssl_name "${CONTACT_ORIGIN_HOST}";
+            proxy_ssl_verify on;
+            proxy_ssl_trusted_certificate "${CONTACT_CA_BUNDLE}";
+            proxy_connect_timeout 3s;
+            proxy_read_timeout 12s;
+            # Never retry a POST at another backend: it might already have sent mail.
+            proxy_next_upstream off;
+            proxy_pass ${CONTACT_UPSTREAM_SCHEME}://contact_backend;
+        }
+        location @contact_limited {
+            default_type application/json;
+            add_header Access-Control-Allow-Origin $contact_origin always;
+            add_header Vary "Origin" always;
+            add_header Retry-After 12 always;
+            return 429 '{"success":false,"message":"Muitas tentativas. Aguarde antes de tentar novamente."}';
+        }
+        location / { return 404; }
+    }
+}

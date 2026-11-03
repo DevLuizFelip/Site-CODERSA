@@ -1,0 +1,170 @@
+[
+  {
+    "route": "/",
+    "theme": "light",
+    "width": 390,
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "brokenImages": []
+  },
+  {
+    "route": "/servicos",
+    "theme": "light",
+    "width": 390,
+    "title": "Soluções em software e automação | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/processo",
+    "theme": "light",
+    "width": 390,
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/portfolio",
+    "theme": "light",
+    "width": 390,
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/sobre",
+    "theme": "light",
+    "width": 390,
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "brokenImages": []
+  },
+  {
+    "route": "/contato",
+    "theme": "light",
+    "width": 390,
+    "title": "Mapear meu processo | Contato CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "width": 1440,
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "brokenImages": []
+  },
+  {
+    "route": "/servicos",
+    "theme": "light",
+    "width": 1440,
+    "title": "Soluções em software e automação | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/processo",
+    "theme": "light",
+    "width": 1440,
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/portfolio",
+    "theme": "light",
+    "width": 1440,
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/sobre",
+    "theme": "light",
+    "width": 1440,
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "brokenImages": []
+  },
+  {
+    "route": "/contato",
+    "theme": "light",
+    "width": 1440,
+    "title": "Mapear meu processo | Contato CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "width": 390,
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "brokenImages": []
+  },
+  {
+    "route": "/servicos",
+    "theme": "dark",
+    "width": 390,
+    "title": "Soluções em software e automação | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/processo",
+    "theme": "dark",
+    "width": 390,
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/portfolio",
+    "theme": "dark",
+    "width": 390,
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/sobre",
+    "theme": "dark",
+    "width": 390,
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "brokenImages": []
+  },
+  {
+    "route": "/contato",
+    "theme": "dark",
+    "width": 390,
+    "title": "Mapear meu processo | Contato CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "width": 1440,
+    "title": "CODERSA | Software, automação e IA aplicada",
+    "brokenImages": []
+  },
+  {
+    "route": "/servicos",
+    "theme": "dark",
+    "width": 1440,
+    "title": "Soluções em software e automação | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/processo",
+    "theme": "dark",
+    "width": 1440,
+    "title": "Como trabalhamos: mapear, construir e acompanhar | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/portfolio",
+    "theme": "dark",
+    "width": 1440,
+    "title": "Resultados e demonstração de fluxo | CODERSA",
+    "brokenImages": []
+  },
+  {
+    "route": "/sobre",
+    "theme": "dark",
+    "width": 1440,
+    "title": "Sobre a CODERSA | Inteligência aplicada ao trabalho real",
+    "brokenImages": []
+  },
+  {
+    "route": "/contato",
+    "theme": "dark",
+    "width": 1440,
+    "title": "Mapear meu processo | Contato CODERSA",
+    "brokenImages": []
+  }
+]
