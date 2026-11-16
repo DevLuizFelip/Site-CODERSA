@@ -5,7 +5,7 @@ export const navigation = [
   { path: '/processo', label: 'Como funciona' },
   { path: '/portfolio', label: 'Resultados' },
   { path: '/sobre', label: 'Sobre' },
-  { path: '/contato', label: 'Contato' },
+  { path: 'https://codersa-crm.luicostasantana.chatgpt.site/projeto?origem=site', label: 'Contato', external: true },
 ];
 export const metadata = {
   '/': { title: 'CODERSA | Software, automação e IA aplicada', description: 'Conecte sistemas, reduza tarefas manuais e acompanhe seus processos com software e IA aplicada ao trabalho real.' },
