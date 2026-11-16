@@ -2,11 +2,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { BrandMark } from './Brand';
 import { offers, processSteps, faqs, contactPath, knownService } from './content';
 import { trackEvent } from './analytics';
-export function Arrow() { return <span aria-hidden="true">↗</span>; }
-export function ContactLink({ source = 'section', service, className = 'button primary', children = 'Mapear meu processo' }) {
+export function Arrow() { return <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M5 19 19 5M5 5h14v14"/></svg>; }
+export function ContactLink({ source = 'section', service, className = 'button primary', children = 'Conte seu projeto' }) {
   const { pathname } = useLocation();
   const validService = knownService(service);
-  return <Link className={className} to={contactPath(validService)} onClick={() => trackEvent(validService === 'blueprint' ? 'blueprint_cta_click' : 'process_mapping_click', { route: pathname, source, service: validService })}>{children}<Arrow/></Link>;
+  return <a className={className} href={contactPath(validService)} onClick={() => trackEvent(validService === 'blueprint' ? 'blueprint_cta_click' : 'process_mapping_click', { route: pathname, source, service: validService })}>{children}<Arrow/></a>;
 }
 export function BlueprintHighlight() {
   return <section className="blueprint-highlight section-pad" aria-labelledby="blueprint-title"><div><p className="eyebrow">EM DESTAQUE / CODERSA BLUEPRINT</p><h2 id="blueprint-title">Da ideia à arquitetura.<br/><em>Da arquitetura à solução.</em></h2><p>Especificação e arquitetura para decidir o que construir, com requisitos, escolhas técnicas e um plano de entrega.</p><p className="form-note">Contrate o projeto técnico independentemente do desenvolvimento.</p><div className="blueprint-actions"><ContactLink service="blueprint">Solicitar um Blueprint</ContactLink><Link className="text-link" to="/servicos/blueprint">Conhecer o Blueprint <Arrow/></Link></div></div><div className="blueprint-outline"><p className="eyebrow">ANTES DE CONSTRUIR</p><ol><li>Delimitar problema e escopo.</li><li>Especificar requisitos e critérios de aceite.</li><li>Validar arquitetura e decisões técnicas.</li><li>Planejar etapas, riscos e incertezas.</li></ol><p>Para fundadores, PMEs, gestores de produto e software houses.</p></div></section>;

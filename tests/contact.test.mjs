@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { validateContact, validateQualification, qualifyContact, sendContact, CONTACT_TIMEOUT_MS } from '../src/site/contact-service.js';
-import { knownService, contactPath } from '../src/site/content.js';
+import { knownService, contactPath, crmContactUrl } from '../src/site/content.js';
 import { trackEvent, configureAnalytics } from '../src/site/analytics.js';
 const valid = { nome: ' Teste ', email: ' teste@example.com ', assunto: ' Novo projeto ', mensagem: ' Um processo de teste. ' };
 const qualified = { ...valid, empresa: '', servico: 'blueprint', preferencia: 'email', telefone: '', website: '' };
 test('service context accepts only catalog identifiers', () => {
-  assert.equal(contactPath('blueprint'), '/contato?servico=blueprint');
+  assert.equal(contactPath('blueprint'), crmContactUrl + '&servico=blueprint');
   for (const invalid of ['<script>', 'email@example.com', '/contato?email=secret', null]) {
-    assert.equal(knownService(invalid), ''); assert.equal(contactPath(invalid), '/contato');
+    assert.equal(knownService(invalid), ''); assert.equal(contactPath(invalid), crmContactUrl);
   }
 });
 test('qualified contact includes context in the legacy envelope without leaking hidden fields', () => {

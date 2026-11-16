@@ -8,7 +8,7 @@ export const navigation = [
   { path: 'https://codersa-crm.luicostasantana.chatgpt.site/projeto?origem=site', label: 'Contato', external: true },
 ];
 export const metadata = {
-  '/': { title: 'CODERSA | Software, automação e IA aplicada', description: 'Conecte sistemas, reduza tarefas manuais e acompanhe seus processos com software e IA aplicada ao trabalho real.' },
+  '/': { title: 'Software sob medida, automação e IA | CODERSA', description: 'Conecte sistemas, reduza tarefas manuais e acompanhe seus processos com software e IA aplicada ao trabalho real.' },
   '/servicos': { title: 'Soluções em software e automação | CODERSA', description: 'Software sob medida, automação e integrações e IA aplicada: conheça como a CODERSA pode trabalhar com seus processos.' },
   '/processo': { title: 'Diagnosticar, especificar, validar e evoluir | CODERSA', description: 'Conheça a jornada de engenharia da CODERSA. Diagnóstico, especificação e avaliação podem ser contratados sem desenvolvimento.' },
   '/servicos/blueprint': { title: 'CODERSA Blueprint | Especificação e arquitetura de software e IA', description: 'Transforme sua ideia em requisitos, arquitetura e plano técnico. Contrate CODERSA Blueprint independentemente do desenvolvimento, com escopo definido.' },
@@ -36,7 +36,8 @@ export const serviceOptions = [
   { id: 'outro', label: 'Outra necessidade' },
 ];
 export const knownService = id => serviceOptions.some(service => service.id === id) ? id : '';
-export const contactPath = id => knownService(id) ? `/contato?servico=${id}` : '/contato';
+export const crmContactUrl = 'https://codersa-crm.luicostasantana.chatgpt.site/projeto?origem=site';
+export const contactPath = id => knownService(id) ? `${crmContactUrl}&servico=${id}` : crmContactUrl;
 export const blueprintDeliverables = [
   'Resumo executivo, problema, stakeholders, usuários e jornadas.',
   'Requisitos funcionais e não funcionais, premissas e exclusões.',

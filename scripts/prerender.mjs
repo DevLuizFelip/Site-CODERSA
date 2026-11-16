@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { render } from '../dist-ssr/entry-server.js';
 import { metadata, siteOrigin } from '../src/site/content.js';
+import { structuredData } from '../src/site/seo.js';
 const template = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 await writeFile(new URL('../dist/spa.html', import.meta.url), template);
@@ -16,7 +17,12 @@ for (const [route, info] of Object.entries(metadata)) {
 <meta property="og:description" content="${escape(info.description)}">
 <meta property="og:url" content="${siteOrigin}${route}">
 <meta property="og:image" content="${siteOrigin}/brand/og.png">
-<meta name="twitter:card" content="summary_large_image">`;
+<meta property="og:image:alt" content="CODERSA — Software, automação e IA aplicada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escape(info.title)}">
+<meta name="twitter:description" content="${escape(info.description)}">
+<meta name="twitter:image" content="${siteOrigin}/brand/og.png">
+<script type="application/ld+json" id="site-structured-data">${JSON.stringify(structuredData(route)).replaceAll('<', '\\u003c')}</script>`;
   const html = template.replace(/<!--route-head-start-->[\s\S]*?<!--route-head-end-->/, head).replace('<div id="root"></div>', `<div id="root" data-prerendered="true">${render(route)}</div>`);
   if (!html.includes('data-prerendered="true"') || !html.includes('<h1')) throw new Error(`Missing rendered content: ${route}`);
   const directory = new URL(`../dist${route === '/' ? '/' : route + '/'}`, import.meta.url);

@@ -4,8 +4,10 @@ import Header from './Header';
 import Footer from './Footer';
 import MaintenancePage from '../pages/MaintenancePage';
 import { metadata, siteOrigin } from '../site/content';
+import { structuredData } from '../site/seo';
 import '../site/site.css';
 import '../site/refinements.css';
+import '../site/client-version.css';
 
 export default function Layout() {
   const [maintenance, setMaintenance] = useState(false);
@@ -26,6 +28,16 @@ export default function Layout() {
     setMeta('meta[property="og:description"]', { property: 'og:description', content: info?.description || '' });
     setMeta('meta[property="og:url"]', { property: 'og:url', content: siteOrigin + path });
     setMeta('link[rel="canonical"]', { rel: 'canonical', href: siteOrigin + path });
+    setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: info?.title || 'CODERSA' });
+    setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: info?.description || '' });
+    setMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    setMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: siteOrigin + '/brand/og.png' });
+    let schema = document.getElementById('site-structured-data');
+    if (info) {
+      if (!schema) { schema = document.createElement('script'); schema.id = 'site-structured-data'; schema.type = 'application/ld+json'; document.head.appendChild(schema); }
+      schema.textContent = JSON.stringify(structuredData(path));
+    } else schema?.remove();
+
     if (lastPath.current !== location.pathname) {
       document.getElementById('conteudo')?.focus({ preventScroll: true });
       if (!location.hash) window.scrollTo(0, 0);
