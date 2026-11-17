@@ -16,7 +16,7 @@ test('every rendered page has matching schema, title, canonical and social metad
 });
 test('homepage provides the services and CRM journey in initial HTML',async()=>{
  const html=await readFile('dist/index.html','utf8');
- for(const text of ['Software sob medida','Automação e integrações','Inteligência artificial','Avaliação de IA','CODERSA BLUEPRINT','Menos tarefas'])assert.ok(html.includes(text));
+ for(const text of ['Software sob medida','Automação e integrações','Inteligência artificial','Avaliação de IA','CODERSA BLUEPRINT','Clareza para criar'])assert.ok(html.includes(text));
  assert.ok(html.includes(crmContactUrl));
  assert.equal(contactPath('unknown'),crmContactUrl);
  assert.ok(contactPath('blueprint').includes('servico=blueprint'));
